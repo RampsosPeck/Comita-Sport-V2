@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,12 +31,12 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse " id="navbarTogglerDemo01">
-                    <div class="logo navbar-brand">
+                    <div class="logo navbar-brand animate__animated animate__lightSpeedInLeft animate__faster">
                         <a href="/">
                         <img src="{{ asset('/img/welcome/logo.png') }}" alt="">
                         </a>
                     </div>
-                    <ul class="enlaces navbar-nav  ml-auto mt-2 mt-lg-0 " id="enlaces">
+                    <ul class="enlaces navbar-nav  ml-auto mt-2 mt-lg-0 animate__animated animate__lightSpeedInRight animate__delay-1s" id="enlaces">
                         <li class="nav-item active">
                             <a href="#inicio" class="">INICIO</a>
                         </li>
@@ -79,14 +79,18 @@
             <section class="caratula" id="inicio">
                 <div class="contenedor">
                     <div class="caratula-cont row">
-                        @yield('saludo')
-                        <div class="caratula-ind col-md-6">
-                            <img src="{{ asset('/img/welcome/principal.svg') }}" alt="Tienda Comita" >
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                @yield('saludo')
+                                <div class="imgprin col-md-6 animate__animated animate__zoomInDown animate__delay-2s">
+                                    <img src="{{ asset('/img/welcome/principal.svg') }}" alt="Tienda Comita" >
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
-             <div class="ola" style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M-2.25,74.50 C256.20,250.16 247.74,-88.31 502.25,74.50 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #fff;"></path></svg></div>
+             <div class="ola sus-clases"  ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M-2.25,74.50 C256.20,250.16 247.74,-88.31 502.25,74.50 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #fff;"></path></svg></div>
         </div>
 
         <main>
