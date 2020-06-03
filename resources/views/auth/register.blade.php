@@ -7,16 +7,16 @@
         <h6 class="text-white"><strong> REGISTRO </strong></h6><hr class="linea-blanca">
         <div class="form-group row">
             <div class="col-sm-6">
-                <input id="name" type="text" class="form-control bg-light shadow-sm @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nombre completo">
+                <input id="fullname" type="text" class="form-control bg-light shadow-sm @error('fullname') is-invalid @enderror" name="fullname" value="{{ old('fullname') }}"  autocomplete="fullname" autofocus placeholder="Nombre completo">
 
-                @error('name')
+                @error('fullname')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
             </div>
             <div class="col-sm-6">
-                <input id="cedula" type="text" class="form-control bg-light shadow-sm @error('cedula') is-invalid @enderror" name="cedula" value="{{ old('cedula') }}" required autocomplete="cedula" placeholder="Cédula de identidad">
+                <input id="cedula" type="text" class="form-control bg-light shadow-sm @error('cedula') is-invalid @enderror" name="cedula" value="{{ old('cedula') }}"  autocomplete="cedula" placeholder="Cédula de identidad">
 
                 @error('cedula')
                     <span class="invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
         <div class="form-group row">
 
             <div class="col-sm-6">
-                <input id="telefono" type="text" class="form-control bg-light shadow-sm @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono" placeholder="Celular o Teléfono">
+                <input id="telefono" type="text" class="form-control bg-light shadow-sm @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}"  autocomplete="telefono" placeholder="Celular o Teléfono">
 
                 @error('telefono')
                     <span class="invalid-feedback" role="alert">
@@ -51,7 +51,7 @@
         <div class="form-group row">
 
             <div class="col-sm-6">
-                <input id="password" type="password" class="form-control bg-light shadow-sm @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Contraseña">
+                <input id="password" type="password" class="form-control bg-light shadow-sm @error('password') is-invalid @enderror" name="password"  autocomplete="new-password" placeholder="Contraseña">
 
                 @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -61,7 +61,7 @@
             </div>
 
             <div class="col-sm-6">
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Repita su contraseña">
+                <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  autocomplete="new-password" placeholder="Repita su contraseña">
             </div>
         </div>
 

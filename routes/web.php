@@ -13,10 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WellcomeController@index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('{categoria}/productos','WellcomeController@show')->name('categoria.productos');
+
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::group([
+	'prefix' => 'admin',
+	'middleware' => 'auth'],
+function(){
+	Route::get('/', 'AdminController@index')->name('admin');
+	}
+);

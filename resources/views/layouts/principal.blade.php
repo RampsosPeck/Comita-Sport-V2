@@ -38,7 +38,7 @@
                     </div>
                     <ul class="enlaces navbar-nav  ml-auto mt-2 mt-lg-0 animate__animated animate__lightSpeedInRight animate__delay-1s" id="enlaces">
                         <li class="nav-item active">
-                            <a href="#inicio" class="">INICIO</a>
+                            <a href="/#inicio" class="">INICIO</a>
                         </li>
                         <li class="nav-item active">
                             <a href="#servicio" class="" >SERVICIO</a>
@@ -59,16 +59,13 @@
 
                         @else
                             <li class="nav-item dropdown">
-                                    <a href="{{ route('admin') }}" role="button" class="text-white">
-                                       {{ strtoupper(Auth::user()->fullname) }}
-                                    </a>
+                                <a href="/admin" role="button" class="text-white">
+                                   {{ strtoupper(Auth::user()->fullname) }}
+                                </a>
                             </li>
                             <li class="nav-item dropdown">
-                              <a class="text-white"  href="{{ route('carrito.detalle') }}">
+                              <a class="text-white"  href="">
                                 <img src="{{ asset('img/shoppingcard.svg') }}" alt="pedidos" width="40" class="">
-                                @if($nummsj = auth()->user()->carrito->detalles->count())
-                                  <span class="badge badge-warning navbar-badge">{{ $nummsj }}</span>
-                                @endif
                               </a>
                             </li>
                         @endguest
@@ -121,12 +118,12 @@
                 <div class="contenedor">
                     <h2 class="titulo">CATEGORIA DE LOS PRODUCTOS</h2>
                     <div class="galeria-port">
-                    <!--@if(isset($categorias))
+                    @if(isset($categorias))
                         @foreach($categorias as $categoria)
                             <div class="imagen-port">
                                 <img src="{{ $categoria->urlcate }}" alt="Categoria Foto">
                                 <div class="hover-galeria">
-                                    <a href="{{ route('categoria.productos', $categoria->id) }}" class="text-center" style="text-decoration: none;">
+                                    <a href="{{ route('categoria.productos', $categoria) }}" class="text-center" style="text-decoration: none;">
                                     <img src="{{ asset('/img/icono1.png') }}" alt="">
                                     <p>{{ $categoria->nombre }}</p>
                                     <p class="text-justify" style="padding-left:12px; padding-right: 12px;">{{ $categoria->descripcion }}</p>
@@ -134,7 +131,7 @@
                                 </div>
                             </div>
                         @endforeach
-                    @endif-->
+                    @endif
                     </div>
                 </div>
             </section>
