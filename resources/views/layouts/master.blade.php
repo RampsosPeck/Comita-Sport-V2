@@ -14,6 +14,8 @@
 
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
+  <link rel="shortcut icon" href="{{ asset('/img/welcome/sport.png') }}" />
+
   <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
   @stack('styles')

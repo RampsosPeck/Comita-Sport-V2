@@ -36,7 +36,7 @@
                 <div class="servicio-ind col-md-4">
                     <div class="card shadow">
                         <div class="card-body">
-                            <img src="{{ $producto->favoritoimagenurl }}" class="card-img-top">
+                            <img src="" class="card-img-top">
                             <h5 class="text-center"><b> {{ $producto->nombre }}</b></h5>
                             <p class="text-justify">
                               {{ $producto->descripcion }}
