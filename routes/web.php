@@ -25,5 +25,16 @@ Route::group([
 	'middleware' => 'auth'],
 function(){
 	Route::get('/', 'AdminController@index')->name('admin');
+	Route::get('users/{slug}','UserController@show')->name('admin.users.show');
+	Route::put('users/{slug}','UserController@create')->name('admin.users.create');
+
+
+	//Rutas USUARIOS
+	Route::get('users', 'UserController@index')->name('admin.users.index');
+	Route::post('users', 'UserController@store')->name('admin.users.store');
+	Route::get('users/{slug}/edit', 'UserController@edit')->name('admin.users.edit');
+	Route::put('users/{slug}/update','UserController@update')->name('admin.users.update');
+	Route::delete('users/{slug}/baja','UserController@destroy')->name('admin.users.delete');
+
 	}
 );
