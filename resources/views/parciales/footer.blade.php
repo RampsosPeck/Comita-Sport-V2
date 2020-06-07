@@ -1,8 +1,9 @@
 <footer class="main-footer">
 	<!-- To the right -->
 	<div class="float-right d-none d-sm-inline">
-  		Univ. Kimberly Marquina
+		<strong>Sport La Comita &copy; {{ date('Y') }}</strong>
+
 	</div>
 	<!-- Default to the left -->
-	<strong>Sport La Comita &copy; {{ date('Y') }}
+	<strong>Ing. Jorge Peralta</strong>
 </footer>

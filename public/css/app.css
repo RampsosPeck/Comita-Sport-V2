@@ -33459,6 +33459,11 @@ readers do not read off random characters that represent icons */
   overflow: hidden;
 }
 
+.img-tam {
+  width: 50% !important;
+  height: 100px !important;
+}
+
 .sidebar-dark-primary {
   background: #0c1926;
 }

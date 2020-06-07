@@ -36,5 +36,15 @@ function(){
 	Route::put('users/{slug}/update','UserController@update')->name('admin.users.update');
 	Route::delete('users/{slug}/baja','UserController@destroy')->name('admin.users.delete');
 
+	/*Estas rutas son para complementos*/
+	Route::get('categorias', 'CategoriaController@index')->name('admin.categorias');
+	Route::post('categorias', 'CategoriaController@store')->name('admin.categorias.store');
+	Route::get('categorias/{slug}/edit', 'CategoriaController@edit')->name('admin.categorias.edit');
+	Route::put('categorias/{slug}', 'CategoriaController@update')->name('admin.categorias.update');
+	Route::delete('categorias/{slug}/baja', 'CategoriaController@destroy')->name('admin.categorias.delete');
+
+
+
+
 	}
 );
