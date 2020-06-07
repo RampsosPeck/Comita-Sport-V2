@@ -50,6 +50,13 @@ function(){
 	Route::put('tallas/{slug}', 'TallaController@update')->name('admin.tallas.update');
 	Route::delete('tallas/{slug}/baja', 'TallaController@destroy')->name('admin.tallas.delete');
 
+	/*Rutas para materiales*/
+	Route::get('materiales','MaterialController@index')->name('admin.materiales.index');
+	Route::post('materiales', 'MaterialController@store')->name('materiales.store');
+	Route::get('materiales/{slug}/edit', 'MaterialController@edit')->name('admin.materiales.edit');
+	Route::put('materiales/{slug}', 'MaterialController@update')->name('admin.materiales.update');
+	Route::delete('materiales/{slug}/baja', 'MaterialController@destroy')->name('admin.materiales.delete');
+
 
 
 	}
