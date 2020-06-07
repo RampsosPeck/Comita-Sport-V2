@@ -43,6 +43,12 @@ function(){
 	Route::put('categorias/{slug}', 'CategoriaController@update')->name('admin.categorias.update');
 	Route::delete('categorias/{slug}/baja', 'CategoriaController@destroy')->name('admin.categorias.delete');
 
+	/*Rutas para tallas*/
+	Route::get('tallas','TallaController@index')->name('admin.tallas.index');
+	Route::post('tallas', 'TallaController@store')->name('tallas.store');
+	Route::get('tallas/{slug}/edit', 'TallaController@edit')->name('admin.tallas.edit');
+	Route::put('tallas/{slug}', 'TallaController@update')->name('admin.tallas.update');
+	Route::delete('tallas/{slug}/baja', 'TallaController@destroy')->name('admin.tallas.delete');
 
 
 

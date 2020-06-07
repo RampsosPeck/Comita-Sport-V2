@@ -137,6 +137,6 @@ class CategoriaController extends Controller
     {
         $categoria = Categoria::where('slug',$slug)->update(['estado'=>false]);
 
-        return redirect('admin/categorias')->with('success', 'La categoria fue dada de Baja');
+        return redirect('admin/categorias')->with('success', 'La tallas fue dada de Baja');
     }
 }

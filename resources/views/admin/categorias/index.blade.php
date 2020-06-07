@@ -53,7 +53,7 @@
 									<td class="text-center">
 										<img src="{{ asset($categoria->urlcate) }}" class="img-tam" alt="Categoria Foto">
 									</td>
-									<td>{{ $categoria->estado }}</td>
+									<td>{{ $categoria->estado ? 'Activo' : 'Baja' }}</td>
 									<td>
 										<a href="{{ route('admin.categorias.edit',[$categoria->slug]) }}" class="btn btn-sm btn-block btn-comita text-white">
 											Editar

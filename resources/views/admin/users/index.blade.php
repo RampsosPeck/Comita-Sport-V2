@@ -54,7 +54,7 @@
 									<td>{{ $user->telefono }}</td>
 									<td>{{ $user->email }}</td>
 									<td>{{ $user->tipo }}</td>
-									<td>{{ $user->activo }}</td>
+									<td>{{ $user->activo ? 'Activo' : 'Baja' }}</td>
 									<td class="text-center">
 										<a href="{{ route('admin.users.edit',[$user->slug]) }}" class="btn btn-sm btn-block  btn-comita text-white">
 											Editar
