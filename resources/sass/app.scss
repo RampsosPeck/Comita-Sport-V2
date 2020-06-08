@@ -13,6 +13,15 @@
 @import '@fortawesome/fontawesome-free/scss/solid.scss';
 @import '@fortawesome/fontawesome-free/scss/brands.scss';
 
+@import '~select2/dist/css/select2.min.css';
+@import '~select2/src/scss/_multiple.scss';
+@import '~select2/src/scss/core.scss';
+@import '~select2/src/scss/_dropdown.scss';
+
+@import '~ion-rangeslider/css/ion.rangeSlider.css';
+@import '~bootstrap-switch/src/sass/bootstrap4/bootstrap-switch.scss';
+@import '~dropzone/dist/dropzone.css';
+
 @import "~animate.css/animate.css";
 
 @import '~owl.carousel/dist/assets/owl.carousel.css';
@@ -51,6 +60,9 @@
 .img-tam {
 	width: 50% !important;
 	height: 100px !important;
+}
+.select2-search__field {
+	width: 130px !important;
 }
 //////////////////////////////////////
 ///////******  ADMIN SIDEBAR ******///
