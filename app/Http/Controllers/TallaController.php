@@ -29,18 +29,20 @@ class TallaController extends Controller
         return redirect('admin/tallas#')->with('success', 'Nueva talla creada correctamente');
     }
 
-    public function edit($slug)
+    public function edit($id)
     {
-    	$talla = Talla::where('slug',$slug)->first();
-    	return view('admin.tallas.edit', compact('talla'));
+
+
     }
 
-    public function update(Request $request, $slug)
+    public function update(Request $request)
     {
-        $talla = Talla::where('slug',$slug)->first();
+        //dd($request->all());
+        $talla = Talla::findOrFail($request->talla_id);
         $talla->nombre = $request['nombre'];
         $talla->descripcion = $request['descripcion'];
         $talla->save();
+        //return back();
         return redirect('admin/tallas')->with('success', 'Talla actualizada correctamente');
     }
 

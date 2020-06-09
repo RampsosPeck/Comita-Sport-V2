@@ -20,6 +20,17 @@ class Producto extends Model
     }
 
     //Accesor para imagen por defecto
+    public function getDetalleImagenUrlAttribute()
+    {
+        $imgUno = $this->fotos()->first();
+
+        if($imgUno){
+            return $imgUno->imagen;//del otro mutator que hicimos en el modelo ProductImage
+        }
+        return '/img/productos/default.jpg';
+    }
+
+    //Accesor para imagen por defecto
     public function getFavoritoImagenUrlAttribute()
     {
         $imgFavorito = $this->fotos()->where('favorito',true)->first();

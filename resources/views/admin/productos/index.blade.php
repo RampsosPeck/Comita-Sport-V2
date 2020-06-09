@@ -21,11 +21,15 @@
 @endsection
 
 @section('contenido')
+@include('admin.productos.create')
 <section class="content">
     <div class="container-fluid">
       <div class="card card-info">
-          <div class="card-header text-center">
-              NUESTROS PRODUCTOS
+          <div class="card-header ">
+              <button type="button" class="btn btn-xl btn-comita text-white pull-rigth" data-toggle="modal" data-target="#crearPro">
+                  <i class="fas fa-plus-circle"></i> Nuevo producto
+              </button>
+              <p class="text-center">NUESTROS PRODUCTOS</p>
           </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -52,7 +56,11 @@
                                 <td class="text-center">Por cada {{ $producto->cant_descuento }} unidades tienes un descuento del {{ $producto->descuento }} %.</td>
                                 <td class="text-center">{{ $producto->des_oferta }}</td>
                                 {{--<td>{{ $producto->categoria->nombre }}</td>--}}
-                                  <td class="text-center"><img src="{{ $producto->FavoritoImagenUrl   }}" alt="" class="img-tam" ></td>
+                                <td class="text-center">
+                                    <button class="btn btn-comita btn-sm text-white" style="position:absolute" type="button" data-toggle="modal" data-target="#foto" data-toggle="tooltip" data-placement="top" title="Ver fotos"><i class="fas fa-plus-circle"></i>
+                                    </button>
+                                    <img src="{{ asset($producto->detalleimagenurl) }}" class="d-block w-100" style="max-height: 250px !important;" alt="Producto Foto">
+                                </td>
                                 {{--<td>{{ $producto->created_at->format('d M h:m') }}</td>--}}
                                 <td class="text-center">
 
@@ -81,10 +89,5 @@
     </div>
 </section>
 @endsection
-
-
-@push('scripts')
-
-@endpush
 
 

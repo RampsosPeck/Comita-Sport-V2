@@ -18,15 +18,15 @@ class CreateProductosTable extends Migration
             $table->string('nombre');
             $table->string('slug')->unique();
             $table->text('descripcion')->nullable();
-            $table->float('precio');
+            $table->float('precio')->nullable();
             $table->float('descuento')->nullable();
             $table->integer('cant_descuento')->nullable();
             $table->string('oferta')->nullable();
             $table->string('des_oferta')->nullable();
             $table->integer('stock')->nullable(); //Esta es la cantidad del producto
-            $table->boolean('estado')->default(1); //Agotado o Disponible
+            $table->boolean('estado')->default(0); //Agotado o Disponible
             //aqui se esta creando la columna que hara referencia a la tabla categorias
-            $table->unsignedBigInteger('categoria_id'); //UNSIGNED--> solo tendra valores positivos
+            $table->unsignedBigInteger('categoria_id')->nullable(); //UNSIGNED--> solo tendra valores positivos
             $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->timestamps();
         });
