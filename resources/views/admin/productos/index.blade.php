@@ -54,30 +54,25 @@
                                 <td class="text-center">{{ $producto->precio }}</td>
                                 <td class="text-center">{{ $producto->stock }}</td>
                                 <td class="text-center">Por cada {{ $producto->cant_descuento }} unidades tienes un descuento del {{ $producto->descuento }} %.</td>
-                                <td class="text-center">{{ $producto->des_oferta }}</td>
+                                <td class="text-center">{{ $producto->oferta }}</td>
                                 {{--<td>{{ $producto->categoria->nombre }}</td>--}}
                                 <td class="text-center">
-                                    <button class="btn btn-comita btn-sm text-white" style="position:absolute" type="button" data-toggle="modal" data-target="#foto" data-toggle="tooltip" data-placement="top" title="Ver fotos"><i class="fas fa-plus-circle"></i>
-                                    </button>
-                                    <img src="{{ asset($producto->detalleimagenurl) }}" class="d-block w-100" style="max-height: 250px !important;" alt="Producto Foto">
+                                    <img src="{{ asset($producto->detalleimagenurl) }}" class="img-tam" alt="Producto Foto">
                                 </td>
                                 {{--<td>{{ $producto->created_at->format('d M h:m') }}</td>--}}
                                 <td class="text-center">
 
-                                  <form method="post" action=" ">
+                                    <form method="post" action="{{ route('admin.productos.baja', $producto->id) }}">
                                       @method('DELETE') @csrf
-
-                                      <a href=" " class="btn btn-sm btn-block colorcard">
-                                        <i class="fa fa-eye"></i> Ver Fotos
-                                      </a>
-                                        <a href=" " class="btn btn-sm btn-block colorprin">
+                                      <a href="{{ route('admin.productos.edit', [$producto->slug]) }}" class="btn btn-sm btn-block btn-comita text-white">
                                           Editar
-                                        </a>
-                                        <button class="btn btn-sm btn-block btn-danger" type="submit">
-                                          Eliminar
-                                        </button>
-                                  </form>
+                                      </a>
 
+                                      <button class="btn btn-sm  btn-outline-comita" type="submit">
+                                        Dar Baja
+                                      </button>
+
+                                    </form>
                                 </td>
                             </tr>
                          @endforeach

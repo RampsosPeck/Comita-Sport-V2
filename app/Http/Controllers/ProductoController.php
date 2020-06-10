@@ -21,7 +21,7 @@ class ProductoController extends Controller
     {
         //dd("estas aqui");
         //Aqui devuelves a un vista
-        $productos = Producto::orderBy('id','DESC')->paginate();
+        $productos = Producto::where('estado',true)->orderBy('id','DESC')->paginate();
         //dd(Producto::paginate(10));
         return view('admin.productos.index', compact('productos'));
     }
@@ -100,7 +100,9 @@ class ProductoController extends Controller
         //Le mandamos tambien las tallas
         $tallas = Talla::all();
         //Con compact enviamos datos
-        return view('admin.productos.edit', compact('producto','categorias','tallas'));
+        $fotos = ProductoFoto::where('producto_id',$producto->id)->get();
+
+        return view('admin.productos.edit', compact('producto','categorias','tallas','fotos'));
 
     }
 
@@ -122,6 +124,7 @@ class ProductoController extends Controller
 
          $producto = Producto::where('slug',$slug)->first();
          $producto->nombre = $request['nombre'];
+         $producto->codigo = $producto->id.'/'.date('Y-M-d h:m').'/'.auth()->user()->id;
          $producto->descripcion = $request['descripcion'];
          $producto->stock = $request['stock'];
          $producto->precio = $request['precio'];
@@ -129,7 +132,6 @@ class ProductoController extends Controller
          $producto->descuento = $request['descuento'];
          $producto->cant_descuento = $request['cant_descuento'];
          $producto->oferta = $request['oferta'];
-         $producto->des_oferta = $request['des_oferta'];
          $producto->estado = true;
          $producto->save();
 
@@ -148,6 +150,22 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Producto::where('id',$id)->update(['estado'=>false]);
+
+        return redirect('admin/productos')->with('success', 'El producto fue dada de Baja');
+
     }
+    public function deletefotos($id)
+    {
+        $foto = ProductoFoto::find($id);
+        //Aqui eliminamos la foto de la base de datos
+        $foto->delete();
+
+        //Aqui eliminamos la foto de nuestra carpeta del sitio Web de la carpeta "STORAGE"
+        $rutafoto = str_replace('storage', 'public', $foto->imagen);
+        Storage::delete($rutafoto);
+
+        return back()->with('success', "Foto del producto eliminado!");
+    }
+
 }
