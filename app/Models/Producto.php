@@ -30,6 +30,7 @@ class Producto extends Model
         return '/img/productos/default.jpg';
     }
 
+
     //Accesor para imagen por defecto
     public function getFavoritoImagenUrlAttribute()
     {
