@@ -24,7 +24,7 @@
 
 @import "~animate.css/animate.css";
 
-@import '~owl.carousel/dist/assets/owl.carousel.css';
+@import '~sweetalert2/src/sweetalert2.scss';
 
 
 /* NUESTROS STYLOS opcionales*/
@@ -779,7 +779,7 @@ footer{
     transition: color .3s;
     color: #232323;
     text-decoration: none;
-    color: #3ba9fc;
+    color: #0a2b4e;
 }
 
 .product-price {
@@ -799,11 +799,11 @@ footer{
     width: 100%;
     border-top: 1px solid #e5e5e5;
     table-layout: fixed;
-    background-color: #bff4fe;
+    background-color: #0a2b4e;
 }
 
 .product-button-group a:hover {
-    color: #3ba9fc
+    color: #FFC300;
 }
 
 .product-button:first-child {
@@ -863,6 +863,100 @@ footer{
     -webkit-transform: translateY(-10px);
     -ms-transform: translateY(-10px);
     transform: translateY(-10px)
+}
+
+
+
+
+/*****************************/
+/***     AQUI ESTAN LOS ESTILOS DEL PRODUCTO DETALLE  **/
+
+.photo-container-detalle {
+  position: absolute;
+  left: -2.5em;
+  display: grid;
+  grid-template-rows: 1fr;
+  width: 85%;
+  height: 75%;
+  border-radius: 6px;
+  box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
+}
+//.photo-main {
+.photo-main-detalle {
+  border-radius: 10px 10px 0 0;
+  background-color: #9be010;
+  background: radial-gradient(#00B4DB, #0083B0);
+
+  //.controls {
+  .controls-detalle {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    color: #fff;
+
+    i {
+      cursor: pointer;
+    }
+  }
+
+}
+
+.title_prodetalle {
+  h1 {
+    margin-bottom: 0.5em;
+    color: #4c4c4c;
+    font-size: 1.5em;
+    font-weight: 900;
+  }
+
+  span {
+    font-size: 0.7em;
+    color: #a6a6a6;
+  }
+}
+
+.description_prodetalles {
+  margin: 0.5em 0;
+  color: #a6a6a6;
+  h3 {
+    margin-bottom: 1em;
+    font-size: 1em;
+  }
+
+}
+
+
+/*************************************/
+/****** AQUI VA LO RESPONSIVO DEL PRODUCTO DETALLE *******/
+@media screen and (max-width:900px){
+    .photo-container-detalle {
+		position: relative;
+		left: 1em !important;
+	}
+}
+
+@media screen and (max-width:500px){
+
+	.photo-container-detalle {
+		position: relative;
+		left: 1em !important;
+	}
+
+}
+
+
+@media screen and (max-width:767px ){
+	.photo-container-detalle {
+		position: relative;
+		left: 1em !important;
+	}
+}
+
+@media screen and (max-width:575px ){
+	.photo-container-detalle {
+		position: relative;
+		left: 1em !important;
+	}
 }
 
 

@@ -13,7 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'WellcomeController@index');
+//Route::get('/', 'WellcomeController@index');
+Route::get('/', function(){
+	return view('welcome');
+});
 
 Auth::routes();
 
@@ -65,6 +68,7 @@ function(){
 	Route::post('productos/{id}/fotos','ProductoController@storefotos');
 	Route::delete('producto/foto/{id}/eliminar','ProductoController@deletefotos')->name('producto.foto.delete');
 	Route::delete('producto/{id}/baja', 'ProductoController@destroy')->name('admin.productos.baja');
+	Route::get('producto/{slug}/detalle','ProductoController@prodetalle')->name('admin.producto.detalles');
 
 
 

@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use App\Models\Producto;
 use App\Models\ProductoFoto;
 use App\Models\Talla;
+use Illuminate\Http\Client\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -135,26 +136,12 @@ class ProductoController extends Controller
          $producto->estado = true;
          $producto->save();
 
-         //La funcion "attach" adjunta un array depalabras en un sola columna
-         $producto->tallas()->attach($request->get('tallas'));
+         $producto->tallas()->sync($request->get('tallas'));
 
          return redirect('/admin/productos')->with('success', 'Producto creado correctamente!');
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        Producto::where('id',$id)->update(['estado'=>false]);
-
-        return redirect('admin/productos')->with('success', 'El producto fue dada de Baja');
-
-    }
     public function deletefotos($id)
     {
         $foto = ProductoFoto::find($id);
@@ -166,6 +153,26 @@ class ProductoController extends Controller
         Storage::delete($rutafoto);
 
         return back()->with('success', "Foto del producto eliminado!");
+    }
+
+    public function destroy($id)
+    {
+        //var_dump($id);
+        $producto = Producto::where('id',$id)->update(['estado'=>false]);
+
+        //return redirect('admin/productos');
+        // check data deleted or not
+         return response()->json(['success'=>'El producto fue dado de baja.']);
+
+    }
+
+    public function prodetalle($slug)
+    {
+        $producto = Producto::where('slug',$slug)->first();
+        $categoria = Categoria::where('id',$producto->categoria_id)->first();
+        //$des_bs = number_format(($producto->precio*$producto->cant_descuento)*$producto->descuento/100 ,2);
+        return view('admin.productos.detalle', compact('producto','categoria'));
+
     }
 
 }
