@@ -1,56 +1,88 @@
-<div class="modal fade" id="foto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header btn-comita text-white">
-        <h5 class="modal-title" id="exampleModalLabel">Subir imagenes del producto</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-        <div class="modal-body">
-        	<input type="hidden" id="producto_id" name="producto_id" >
-			<div class="dropzone btn-comita text-white"></div>
-      	</div>
-    </div>
-  </div>
-</div>
+/*boton mas menos*/
+<style>
+  .number-input input[type="number"] {
+-webkit-appearance: textfield;
+-moz-appearance: textfield;
+appearance: textfield;
+}
 
+.number-input input[type=number]::-webkit-inner-spin-button,
+.number-input input[type=number]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+}
 
+.number-input {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
-@push('scripts')
-<script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
-<script type="text/javascript">
+.number-input button {
+-webkit-appearance: none;
+background-color: transparent;
+border: none;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+margin: 0;
+position: relative;
+}
 
+.number-input button:before,
+.number-input button:after {
+display: inline-block;
+position: absolute;
+content: '';
+height: 2px;
+transform: translate(-50%, -50%);
+}
 
- var myDropzone = new Dropzone('.dropzone', {
-    url: '/admin/users/ /edit',
-    paramName: 'foto',
-    acceptedFiles: 'image/*',
-    maxFilesize: 1,
-    maxFiles: 3,
-    headers: {
-      'x-CSRF-TOKEN': '{{ csrf_token() }}'
-    },
-    dictDefaultMessage: 'Arrastra las fotos aquí para enviarlas',
-    dictMaxFilesExceeded: 'Solo se permiten subir 3 imágenes.'
-  });
-  myDropzone.on('error', function(file, res){
-    var msj = res.errors.foto[0];
-    $('.dz-error-message:last > span').text(msj);
-  });
-  Dropzone.autoDiscover = false;
+.number-input button.plus:after {
+transform: translate(-50%, -50%) rotate(90deg);
+}
 
+.number-input input[type=number] {
+text-align: center;
+}
 
-</script>
+.number-input.number-input {
+border: 1px solid #ced4da;
+width: 10rem;
+border-radius: .25rem;
+}
 
-@endpush
+.number-input.number-input button {
+width: 2.6rem;
+height: .7rem;
+}
 
+.number-input.number-input button.minus {
+padding-left: 10px;
+}
 
+.number-input.number-input button:before,
+.number-input.number-input button:after {
+width: .7rem;
+background-color: #495057;
+}
 
+.number-input.number-input input[type=number] {
+max-width: 4rem;
+padding: .5rem;
+border: 1px solid #ced4da;
+border-width: 0 1px;
+font-size: 1rem;
+height: 2rem;
+color: #495057;
+}
 
+@media not all and (min-resolution:.001dpcm) {
+@supports (-webkit-appearance: none) and (stroke-color:transparent) {
 
-
-
-
-
-
+.number-input.def-number-input.safari_only button:before,
+.number-input.def-number-input.safari_only button:after {
+margin-top: -.3rem;
+}
+}
+}
+</style>
