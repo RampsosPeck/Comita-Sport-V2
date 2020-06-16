@@ -123,7 +123,7 @@
                             <div class="imagen-port">
                                 <img src="{{ $categoria->urlcate }}" alt="Categoria Foto">
                                 <div class="hover-galeria">
-                                    <a href="{{ route('categoria.productos', $categoria) }}" class="text-center" style="text-decoration: none;">
+                                    <a href="{{ route('categoria.productos', [$categoria->slug]) }}" class="text-center" style="text-decoration: none;">
                                     <img src="{{ asset('/img/icono1.png') }}" alt="">
                                     <p>{{ $categoria->nombre }}</p>
                                     <p class="text-justify" style="padding-left:12px; padding-right: 12px;">{{ $categoria->descripcion }}</p>

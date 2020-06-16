@@ -14,8 +14,9 @@ class WellcomeController extends Controller
     	return view('welcome', compact('categorias'));
     }
 
-    public function show(Categoria $categoria)
+    public function show($slug)
     {
+        $categoria = Categoria::where('slug',$slug)->first();
     	//dd($categoria);
         $productos = Producto::where('categoria_id',$categoria->id)->orderBy('id','DESC')->get();
         //dd($productos);

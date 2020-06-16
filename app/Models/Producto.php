@@ -46,8 +46,14 @@ class Producto extends Model
     }
 
     //Esta es la relacion para q un producto tenga varias tallas
-    public function tallas(){
+    public function tallas()
+    {
         return $this->belongsToMany(Talla::class);
+    }
+
+    public function carrito_detalle()
+    {
+        return $this->belongsTo(CarritoDetalle::class);
     }
 
 }
