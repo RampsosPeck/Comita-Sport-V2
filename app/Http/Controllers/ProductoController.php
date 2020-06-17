@@ -21,6 +21,7 @@ class ProductoController extends Controller
     public function index()
     {
         //dd("estas aqui");
+        Producto::where('codigo',null)->delete();
         //Aqui devuelves a un vista
         $productos = Producto::orderBy('id','DESC')->paginate();
         //dd(Producto::paginate(10));
