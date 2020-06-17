@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Carrito;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -44,5 +45,21 @@ class User extends Authenticatable
         return $this->hasMany(Carrito::class);
     }
 
+    //este es nuestro axesor para sacar el id del carrito para cada usuario-->carrito_id
+    public function getCarritoAttribute()
+    {
+        $carrito = $this->carritos()->where('estado', 'Activo')->first();
+
+        if ($carrito){
+            return $carrito;
+        }
+        else{
+            $carrito = new Carrito();
+            $carrito->estado = 'Activo';
+            $carrito->user_id = $this->id;
+            $carrito->save();
+            return $carrito;
+        }
+    }
 
 }
