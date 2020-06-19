@@ -15,7 +15,7 @@ class CarritoDetalleController extends Controller
      */
     public function index()
     {
-        $carrito = auth()->user()->carritos->where('estado', 'Activo')->first();
+        $carrito = auth()->user()->carrito;
         //dd($carrito);
         if($carrito){
             $detalles = CarritoDetalle::where('carrito_id',$carrito->id)->get();
