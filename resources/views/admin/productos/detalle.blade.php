@@ -41,7 +41,7 @@
                                 <i class="fas fa-heart"></i>
                               </div>
                               <div class="product-thumb">
-                                <img id="featured" src="{{ asset($producto->detalleimagenurl) }}" alt="toaster"/>
+                                <img id="featured" src="{{ asset($producto->detalleimagenurl) }}" alt="img producto"/>
                               </div>
                           </div>
                           <div class="justify-content-center btn-comita pt-3 pl-3 pr-3" style="border-radius: 5px;">
@@ -84,7 +84,7 @@
                           @csrf
                       <div class="subti_prodetalle">
                           <div class="form-group row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 form-control bg-light border-0  @error('tallas') is-invalid @enderror ">
                                 <h3>TALLAS</h3>
                                 <div class="product-talla">
                                     @foreach($producto->tallas as $talla)

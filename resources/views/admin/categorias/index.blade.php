@@ -51,7 +51,7 @@
 									<td>{{ $categoria->nombre }}</td>
 									<td>{{ $categoria->descripcion }}</td>
 									<td class="text-center">
-										<img src="{{ asset($categoria->urlcate) }}" class="img-tam" alt="Categoria Foto">
+										<img src="{{ asset($categoria->urlcate) }}" class="media-object" style="width: 80px; height: 80px; border:2px solid cyan;" alt="Categoria Foto">
 									</td>
 									<td>{{ $categoria->estado ? 'Activo' : 'Baja' }}</td>
 									<td>

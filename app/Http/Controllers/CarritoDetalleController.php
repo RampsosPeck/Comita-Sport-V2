@@ -56,6 +56,11 @@ class CarritoDetalleController extends Controller
      */
     public function show(Request $request, $id)
     {
+        //dd($request->all());
+        $request->validate([
+            'tallas' => 'required',
+            'cantidad' => 'required|min:1',
+        ]);
 
         $producto = Producto::where('id',$id)->first();
 

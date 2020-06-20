@@ -14,7 +14,9 @@
           <img src="{{ asset('img/sidebar/userdefault.svg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="{{ route('admin.users.show', [Auth::user()->slug]) }}" class="text-center" ><b>{{ Auth::user()->fullname }}</b> </a>
+          <a href="{{ route('admin.users.show', [Auth::user()->slug]) }}" class="text-center " >
+              <span >{{ Auth::user()->fullname }} </span>
+          </a>
         </div>
       </div>
 
@@ -82,13 +84,13 @@
               <p>
                   Carrito
                   @if($nummsj = auth()->user()->carrito->carrito_detalles->count())
-                      <span class="right badge badge-warning">{{ $nummsj }}</span>
+                      <span class="right badge text-white" style="background-color:cyan;">{{ $nummsj }}</span>
                   @endif
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link {{ request()->is('admin/cotizaciones*') ? 'active' : '' }}">
+            <a href="{{ route('admin.cotizaciones.index') }}" class="nav-link {{ request()->is('admin/cotizaciones*') ? 'active' : '' }}">
               <img src="{{ asset('img/sidebar/cotizacion.svg') }}" alt="pedidos" class="nav-icon">
               <p>
                   Cotizaciones

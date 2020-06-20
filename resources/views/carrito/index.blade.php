@@ -44,7 +44,7 @@
 							<tbody>
 								@foreach($detalles as $key => $detalle)
 								<tr>
-									<td class="col-sm-1 col-md-1" style="text-align: center">{{ ++$key }}</td>
+									<td class="" style="text-align: center">{{ ++$key }}</td>
 									<td class="col-sm-5 col-md-5">
 										<div class="media">
 				                            <a class="thumbnail pull-left pr-2" href="#">
@@ -90,9 +90,7 @@
 									</td>
 								</tr>
 									@php
-										if($detalle){
-											$total = $detalle->montototal;
-										}
+										$total = $total + $detalle->subtotal_bs;
 									@endphp
 								@endforeach
 							</tbody>
@@ -117,12 +115,14 @@
 			                        <td>   </td>
 			                        <td>   </td>
 			                        <td>
-				                        <form method="post" action="{{ route('admin.carrito.update') }}">
-											@csrf
-											<button type="submit" class="btn btn-block btn-comita text-white">
-				                            ENVIAR  <i class="fas fa-cart-plus"></i>
-				                        	</button>
-										</form>
+			                        	@if($detalles->count())
+					                        <form method="post" action="{{ route('admin.carrito.update') }}">
+												@csrf
+												<button type="submit" class="btn btn-block btn-comita text-white">
+					                            ENVIAR  <i class="fas fa-cart-plus"></i>
+					                        	</button>
+											</form>
+										@endif
 			                    	</td>
 			                    </tr>
 			                </tfoot>

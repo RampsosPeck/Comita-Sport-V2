@@ -41,6 +41,9 @@
                         <div class="car_home_precio btn-comita">
                             <strong> {{ $producto->precio }} Bs. </strong>
                         </div>
+                        <div class="car_home_img">
+                             <img src="{{ asset('img/logo2.png') }}" alt="pedidos" width="100" class="" style="margin-top: -5px;">
+                        </div>
 
                           <div class="product-thumb">
                             <img id="featured" src="{{ asset($producto->detalleimagenurl) }}" alt="toaster" />
@@ -51,12 +54,12 @@
                             <div class="product-nombre">
                               <a href="#" data-abc="true"><strong> {{ $producto->nombre }} </strong></a>
                             </div>
-                            <div class="product-description text-justify">
+                            <!--<div class="product-description text-justify">
                                 <a href="#" data-abc="true" > {{ $producto->descripcion }}</a>
-                            </div>
+                            </div> -->
                             @guest
                             @else
-                            <div class="product-talla">
+                            <div class="product-talla form-control bg-light border-0  @error('tallas') is-invalid @enderror ">
                                 <strong>Tallas:</strong>
                                 @foreach($producto->tallas as $talla)
                                     <label class="checkbox-btn">
