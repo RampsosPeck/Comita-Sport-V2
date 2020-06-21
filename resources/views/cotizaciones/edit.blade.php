@@ -27,19 +27,19 @@
       <div class="row justify-content-center">
         <div class="text-center col-md-10">
           @if($fotos->count())
-        <div class="row row-cols-1 row-cols-md-3 p-2">
-          @foreach($fotos as $foto)
-            <div class="btn-comita text-center p-2">
-              <form method="POST" action="{{ route('producto.foto.delete',$foto->id) }}" class="">
-                @csrf @method('DELETE')
-                <button class="btn btn-danger btn-xs" style="position:absolute" type="submit"><i class="fas fa-times-circle"></i></button>
-                  <img src="{{ url($foto->imagen) }}" class="img-tam-edit" alt="...">
-              </form>
+            <div class="row row-cols-1 row-cols-md-3 p-2">
+              @foreach($fotos as $foto)
+                <div class="btn-comita text-center p-2">
+                  <form method="POST" action="{{ route('cotizacion.foto.delete',$foto->id) }}" class="">
+                    @csrf @method('DELETE')
+                    <button class="btn btn-danger btn-xs" style="position:absolute" type="submit"><i class="fas fa-times-circle"></i></button>
+                      <img src="{{ url($foto->imagen) }}" class="img-tam-edit" alt="...">
+                  </form>
+                </div>
+              @endforeach
             </div>
-          @endforeach
+          @endif
         </div>
-        @endif
-      </div>
     </div>
     <form method="POST" action="{{ route('admin.cotizaciones.update',[$cotizacion->slug]) }}" class="was-validated">
       @csrf @method('PUT')
@@ -142,7 +142,7 @@
           </div>
           <div class="row  justify-content-center">
             <button class="btn btn-comita text-white" type="submit" >
-              GUARDAR PRODUCTO
+              GUARDAR COTIZACIÓN
             </button>
           </div>
       </form>

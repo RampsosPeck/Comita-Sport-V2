@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Cotizacion extends Model
 {
     protected $table = 'cotizaciones';
-    protected $fillable = ['nombre','slug','codigo','cantidad','descripcion','descuento','precio','estado'];
+    protected $fillable = ['nombre','slug','codigo','cantidad','fecha','descripcion','descuento','precio','estado','user_id'];
 
 
     public function fotos(){
@@ -32,5 +33,9 @@ class Cotizacion extends Model
     public function materiales()
     {
         return $this->belongsToMany(Material::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
