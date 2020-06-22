@@ -86,6 +86,9 @@ function(){
 	Route::get('cotizaciones/{slug}/show','CotizacionController@show')->name('admin.cotizaciones.show');
 	Route::delete('cotizacion/{id}/eliminar', 'CotizacionController@destroy')->name('admin.cotizacion.delete');
 
+	/*Rutas para pedidos*/
+	Route::get('pedidos','PedidoController@index')->name('admin.pedidos.index');
+	Route::get('pedidos/{id}/show','PedidoController@show')->name('admin.pedidos.show');
 
 	}
 );

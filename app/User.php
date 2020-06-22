@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Carrito;
+use App\Models\Cotizacion;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -65,6 +66,11 @@ class User extends Authenticatable
     public function cotizaciones()
     {
         return $this->hasMany(Cotizacion::class);
+    }
+
+    public function getCotizacionAttribute()
+    {
+        $cotizacion = $this->cotizaciones()->where('estado', 'Pendiente')->first();
     }
 
 }
