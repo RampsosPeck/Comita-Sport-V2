@@ -31,7 +31,13 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#" data-toggle="tooltip" data-placement="bottom" title="Mensajes">
+
+                        <span class="badge btn-comita text-white navbar-badge" style="margin-top: -4px;" >
+
+                        </span>
+
                     <img src="{{ asset('img/message.svg') }}" alt="pedidos" width="35" class="nav-icon" style="margin-top: -5px;">
+
                 </a>
             </li>
             <li class="nav-item">

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Cotizacion;
 use App\Models\CotizacionFoto;
 use App\Models\Material;
+use App\Models\Mensaje;
 use App\Models\Talla;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -65,7 +67,7 @@ class CotizacionController extends Controller
          $cotizacion->codigo = $cotizacion->id.'/'.date('Y-M-d h:m').'/'.auth()->user()->id;
          $cotizacion->descripcion = $request['descripcion'];
          $cotizacion->cantidad = $request['cantidad'];
-         $cotizacion->estado = 'Pendiente';
+         $cotizacion->estado = 'Activo';
          $cotizacion->save();
 
          $cotizacion->tallas()->sync($request->get('tallas'));
@@ -107,7 +109,9 @@ class CotizacionController extends Controller
         $cotizacion = Cotizacion::where('slug',$slug)->first();
         $fotos = CotizacionFoto::where('cotizacion_id',$cotizacion->id)->get();
 
-        return view('cotizaciones.show', compact('cotizacion','fotos'));
+        $mensajes = Mensaje::where('cotizacion_id',$cotizacion->id)->orderBy('id','ASC')->paginate();
+
+        return view('cotizaciones.show', compact('cotizacion','fotos','mensajes' ));
     }
 
     public function destroy($id)
@@ -119,6 +123,17 @@ class CotizacionController extends Controller
         $cotizacion->delete();
 
         return response()->json(['success'=>'La cotización fue eliminada.']);
+
+    }
+    public function moneycoti(Request $request)
+    {
+        //dd($request->all());
+        $cotizacion = Cotizacion::where('id',$request['cotizacion_id'])->first();
+        $cotizacion->precio = $request['precio'];
+        $cotizacion->estado = "Pendiente";
+        $cotizacion->save();
+
+        return back()->with('success', 'Se le asigno nuevo precio a la cotización');
 
     }
 

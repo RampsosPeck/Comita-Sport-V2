@@ -38,10 +38,9 @@
                         <tr class="text-center">
                           <th scope="col">#</th>
                           <th scope="col">Cotización</th>
-                          <th scope="col">Cantidad</th>
                           <th scope="col">Tallas</th>
                           <th scope="col">Materiales</th>
-                          <th scope="col">Precio</th>
+                          <th scope="col">Respuesta</th>
                           <th scope="col">Opciones</th>
                         </tr>
                       </thead>
@@ -49,30 +48,37 @@
                          @foreach($cotizaciones as $key => $cotizacion)
                             <tr>
                                 <td class="text-center col-sm-1 col-md-1" >{{ ++$key }}</td>
-                                <td class="col-sm-4 col-md-4">
+                                <td class="col-sm-5 col-md-5">
                                     <div class="media">
-                                        <a class="thumbnail pull-left pr-2" href="#">
+                                        <a class="thumbnail pull-left pr-2" href="{{ route('admin.cotizaciones.show',[$cotizacion->slug]) }}" target="__blanck">
                                           <img class="media-object" src="{{ asset($cotizacion->fotoimagen) }}" style="width: 80px; height: 80px; border:2px solid cyan;">
                                         </a>
                                         <div class="media-body ">
                                             <div class="title_prodetalle">
-                                              <h1 style="font-size: 1.5em;" class="mb-0">
+                                              <h1 style="font-size: 1.2em;" class="mb-0">
                                                 {{ $cotizacion->nombre }}
                                               </h1>
                                             </div>
-                                            <div class="product-talla">
+                                            <div class="product-talla text-justify">
                                                 <strong>Código:</strong>
                                                 <label class="checkbox-btn mb-0">
                                                     <span class="btn btn-light-checkbox" style="background-color: cyan;"> {{ $cotizacion->codigo }} </span>
+                                                </label> <br />
+                                                <strong>Cantidad:</strong>
+                                                <label class="checkbox-btn mb-0">
+                                                    <span class="btn btn-light-checkbox"> {{ $cotizacion->cantidad }} </span>
                                                 </label> <br/>
-                                                <small class="text-justify text-sm-left text-muted">
+                                                <small class=" text-sm-left text-muted  d-inline-block text-truncate" style="max-width: 150px;">
                                                   {{ $cotizacion->descripcion }}
                                                 </small>
+                                                <a href="{{ route('admin.cotizaciones.show',[$cotizacion->slug]) }}" class="btn btn-sm   btn-outline-secondary " data-toggle="tooltip" data-placement="right" title="Ver detalles."  target="__blanck">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center col-sm-1 col-md-1">{{ $cotizacion->cantidad }}</td>
+
                                 <td class="col-sm-2 col-md-2">
                                     @foreach($cotizacion->tallas as $talla)
                                         <label class="checkbox-btn mb-0">
@@ -80,14 +86,17 @@
                                         </label>
                                     @endforeach
                                 </td>
-                                <td class="col-sm-2 col-md-2">
+                                <td class="col-sm-3 col-md-3">
                                     @foreach($cotizacion->materiales as $material)
                                         <label class="checkbox-btn mb-0">
                                             <span class="btn btn-light-checkbox bg-light "> {{ $material->nombre }} </span>
                                         </label>
                                     @endforeach
                                 </td>
-                                <td class="text-center col-sm-1 col-md-1">
+                                <td class="text-center col-sm-2 col-md-2">
+
+                                </td>
+                                {{--<td class="text-center col-sm-1 col-md-1">
                                     {{ $cotizacion->precio }}
                                     @if($cotizacion->descuento)
                                     <div class="product-talla">
@@ -98,7 +107,7 @@
                                     </div>
                                     @endif
                                 </td>
-                                {{--<td class="text-center">
+                                <td class="text-center">
                                     <picture style="position: relative;">
                                         <div class="car_home_precio">
                                           @if($cotizacion->estado ===  "ACTIVO")
@@ -121,14 +130,17 @@
                                 </td>
                                 <td>{{ $producto->created_at->format('d M h:m') }}</td>--}}
                                 <td class="text-center col-sm-1 col-md-1">
-                                    <a href="{{ route('admin.cotizaciones.show',[$cotizacion->slug]) }}" class="btn btn-sm btn-block btn-outline-comita" target="__blanck">
-                                          Ver Detalles
+                                    <a href="{{ route('admin.cotizaciones.show',[$cotizacion->slug]) }}" class="btn btn-sm btn-block btn-comita text-white" target="__blanck">
+                                        <i class="far fa-eye"></i>
+                                        Ver detalles
                                     </a>
-                                    <a href="{{ route('admin.cotizaciones.edit',[$cotizacion->slug]) }}" class="btn btn-sm btn-block btn-comita text-white">
+                                    <a href="{{ route('admin.cotizaciones.edit',[$cotizacion->slug]) }}" class="btn btn-sm btn-block btn-outline-comita ">
+                                        <i class="far fa-edit"></i>
                                           Editar
                                     </a>
                                     <button class="btn btn-block btn-sm  btn-outline-danger"  onclick="deleteConfirmation('{{$cotizacion->id}}')">
-                                      Eliminar
+                                        <i class="far fa-trash-alt"></i>
+                                        Eliminar
                                     </button>
                                 </td>
                             </tr>

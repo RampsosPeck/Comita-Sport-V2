@@ -90,5 +90,12 @@ function(){
 	Route::get('pedidos','PedidoController@index')->name('admin.pedidos.index');
 	Route::get('pedidos/{id}/show','PedidoController@show')->name('admin.pedidos.show');
 
+	/*Rutas para los mensajes*/
+	Route::post('mensajes/cotizacion','MensajeController@store')->name('admin.mensajes.store');
+
+	Route::post('cotizacion/money','CotizacionController@moneycoti')->name('admin.cotizacion.money');
+
+
+
 	}
 );

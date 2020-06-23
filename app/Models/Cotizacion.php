@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cotizacion extends Model
 {
     protected $table = 'cotizaciones';
-    protected $fillable = ['nombre','slug','codigo','cantidad','fecha','descripcion','descuento','precio','estado','user_id'];
+    protected $fillable = ['nombre','slug','codigo','cantidad','fecha','descripcion','anticipo','descuento','precio','estado','user_id'];
 
 
     public function fotos(){
@@ -37,5 +37,10 @@ class Cotizacion extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function mensajes()
+    {
+        return $this->hasMany(Mensaje::class);
     }
 }
