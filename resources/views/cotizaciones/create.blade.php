@@ -11,7 +11,7 @@
           @csrf
           <div class="modal-body">
               <div class="form-group row">
-                  <label for="email" class="col-sm-5 col-form-label text-md-right"><strong></strong>{{ __('Nombre de la cotización:') }}</strong></label>
+                  <label for="email" class="col-sm-5 col-form-label text-md-right"><strong>{{ __('Nombre de la cotización:') }}</strong></label>
                   <div class="col-sm-7">
                       <input type="text" class="form-control bg-light   @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}"  autocomplete="nombre" autofocus placeholder="Nombre de la cotización" >
 

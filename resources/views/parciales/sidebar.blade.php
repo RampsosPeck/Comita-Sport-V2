@@ -84,7 +84,7 @@
               <p>
                   Carrito
                   @if($nummsj = auth()->user()->carrito->carrito_detalles->count())
-                      <span class="right badge text-white" style="background-color:cyan;">{{ $nummsj }}</span>
+                      <span class="right badge bg-success" >{{ $nummsj }}</span>
                   @endif
               </p>
             </a>
@@ -94,8 +94,8 @@
               <img src="{{ asset('img/sidebar/cotizacion.svg') }}" alt="pedidos" class="nav-icon">
               <p>
                   Cotizaciones
-                  @if($numco = auth()->user()->cotizaciones->count())
-                      <span class="right badge text-white bg-warning">{{ $numco }}</span>
+                  @if($numco = auth()->user()->cotizaciones->where('estado','Activo')->count())
+                      <span class="right badge bg-warning">{{ $numco }}</span>
                   @endif
               </p>
             </a>
@@ -104,7 +104,17 @@
             <a href="{{ route('admin.pedidos.index') }}" class="nav-link {{ request()->is('admin/pedidos*') ? 'active' : '' }}">
               <img src="{{ asset('img/sidebar/pedidos.svg') }}" alt="pedidos" class="nav-icon">
               <p>
+                @php
+                  use App\Models\Carrito;
+                  use App\Models\Cotizacion;
+                @endphp
+                  @if($nummsj = Carrito::where('estado','Pendiente')->count())
+                      <span class="right badge bg-success mr-4" >{{ $nummsj }}</span>
+                  @endif
                   Pedidos
+                  @if($numco = Cotizacion::where('estado','Pendiente')->count())
+                      <span class="right badge bg-warning">{{ $numco }}</span>
+                  @endif
               </p>
             </a>
           </li>

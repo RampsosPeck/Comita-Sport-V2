@@ -89,11 +89,16 @@ function(){
 	/*Rutas para pedidos*/
 	Route::get('pedidos','PedidoController@index')->name('admin.pedidos.index');
 	Route::get('pedidos/{id}/show','PedidoController@show')->name('admin.pedidos.show');
+	Route::get('pedidos/{slug}/cotizacion','PedidoController@detallecoti')->name('admin.pedidos.detallecoti');
+	Route::post('pedido/cotizacion/venta','PedidoController@cotianticipo')->name('admin.pedidos.anticipo');
 
 	/*Rutas para los mensajes*/
 	Route::post('mensajes/cotizacion','MensajeController@store')->name('admin.mensajes.store');
 
 	Route::post('cotizacion/money','CotizacionController@moneycoti')->name('admin.cotizacion.money');
+	Route::get('cotizacion/{id}/pedido','CotizacionController@cotiapedido')->name('admin.cotizaciones.pedido');
+
+
 
 
 
