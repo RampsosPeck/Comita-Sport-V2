@@ -105,6 +105,10 @@ function(){
 
 
 	Route::post('venta/carrito/pago','VentaController@carripago')->name('admin.ventas.carripago');
+	Route::post('venta/cotizacion/pago','VentaController@cotipago')->name('admin.ventas.cotipago');
+
+	/*Ruta para imagen de deposito de pago*/
+	Route::post('pedido/pagos','PedidoController@pedidopago')->name('admin.pedidos.pagar');
 
 
 

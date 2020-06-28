@@ -23,5 +23,8 @@ class Carrito extends Model
     	return $this->hasMany(CarritoDetalle::class);
     }
 
-
+    public function pagoimgcarri()
+    {
+        return $this->hasOne(CarritoPago::class);
+    }
 }

@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Carrito;
 use App\Models\Cotizacion;
+use App\Models\Pago;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;

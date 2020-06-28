@@ -21,6 +21,7 @@
 
 @section('contenido')
 @include('pedidos.fechacarri')
+@include('pedidos.pagopedi')
 <section class="content">
 	<div class="container-fluid">
 		<div class="col-12 col-sm-12 col-lg-12 mx-auto">
@@ -65,7 +66,7 @@
 									<tbody>
 										@foreach($carritos as $key => $carrito)
 										<tr>
-											<td class="" style="text-align: center">{{ ++$key }}</td>
+											<td class="" style="text-align: center">{{ $carrito->id }}</td>
 											<td class="col-sm-5 col-md-5">
 												<div class="media">
 						                            <a class="thumbnail pull-left pr-2" href="{{ route('admin.pedidos.show', [$carrito->id]) }}" target="_blanck">
@@ -108,10 +109,27 @@
 									                <i class="fas fa-hand-holding-usd"></i> ENVIAR A VENTA
 									            </button>
 											</td>
-											<td class="col-sm-1 col-md-1 text-white " >
+											<td class="col-sm-1 col-md-1 text-center  " >
 											  	<a href="{{ route('admin.pedidos.show', [$carrito->id]) }}" class="btn btn-sm btn-block btn-comita" target="_blanck">
 				                                    <span class="text-white">Ver Pedido</span>
 				                                </a>
+				                                @if($carrito->pagoimgcarri)
+													@if(auth()->user()->tipo === 'Administrador')
+														<a href="" class="btn btn-sm btn-block btn-outline-success" target="_blanck">
+						                                    <span class="text-white">Validar Pago</span>
+						                                </a>
+													@else
+														@if($carrito->pagoimgcarri->estado)
+														<strong style="color:green;" class="btn btn-sm btn-block">Pago Aceptado</strong>
+														@else
+														<strong style="color:red;" class="btn btn-sm btn-block">Validando Pago</strong>
+				                                		@endif
+				                                	@endif
+				                                @else
+				                                <button type="button" class="btn btn-sm btn-block  btn-outline-success" data-pedidoid="{{ $carrito->id }}" data-tipo="carrito" data-codigo="{{ $carrito->codigo }}" data-toggle="modal" data-target="#pedidoPago">
+									                <i class="far fa-images"></i> PAGAR
+									            </button>
+												@endif
 											</td>
 										</tr>
 										@endforeach
@@ -179,6 +197,23 @@
 											  	<a href="{{ route('admin.pedidos.detallecoti',[$cotizacion->slug]) }}" class="btn btn-sm btn-block btn-comita" target="_blanck">
 				                                    <span class="text-white">Ver Cotización</span>
 				                                </a>
+				                                @if($cotizacion->pagoimgcoti)
+													@if(auth()->user()->tipo === 'Administrador')
+														<a href="" class="btn btn-sm btn-block btn-outline-success" target="_blanck">
+						                                    <span class="text-white">Validar Pago</span>
+						                                </a>
+													@else
+														@if($cotizacion->pagoimgcoti->estado)
+														<strong style="color:green;" class="btn btn-sm btn-block">Pago Aceptado</strong>
+														@else
+														<strong style="color:red;" class="btn btn-sm btn-block">Validando Pago</strong>
+				                                		@endif
+				                                	@endif
+				                                @else
+				                                <button type="button" class="btn btn-sm btn-block  btn-outline-success" data-pedidoid="{{ $cotizacion->id }}" data-tipo="cotizacion" data-codigo="{{ $cotizacion->codigo }}" data-toggle="modal" data-target="#pedidoPago">
+									                <i class="far fa-images"></i> PAGAR
+									            </button>
+									            @endif
 											</td>
 										</tr>
 										@endforeach
@@ -235,5 +270,24 @@ $('#crearFecha').on('show.bs.modal', function (event) {
 	  var modal = $(this)
 	  modal.find('.modal-body #carrito_id').val(ca_id);
 })
+</script>
+
+<script>
+$('#pedidoPago').on('show.bs.modal', function (event) {
+
+	  var button = $(event.relatedTarget)
+	  var pe_id = button.data('pedidoid')
+	  var pe_tipo = button.data('tipo')
+	  var pe_codigo = button.data('codigo')
+	  var modal = $(this)
+	  modal.find('.modal-body #pedido_id').val(pe_id);
+	  modal.find('.modal-body #pedido_tipo').val(pe_tipo);
+	  modal.find('.modal-body #pedido_codigo').val(pe_codigo);
+})
+</script>
+<script>
+$custom-file-text: (
+  es: "Elegir"
+);
 </script>
 @endpush
