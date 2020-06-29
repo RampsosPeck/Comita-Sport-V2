@@ -50,4 +50,5 @@ class Cotizacion extends Model
     {
         return $this->hasOne(CotiPago::class);
     }
+
 }

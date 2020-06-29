@@ -27,4 +27,5 @@ class Carrito extends Model
     {
         return $this->hasOne(CarritoPago::class);
     }
+
 }
