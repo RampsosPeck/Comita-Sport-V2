@@ -26,8 +26,20 @@
 <section class="content">
 	<div class="container-fluid">
 		<div class="card">
-			<div class="card-header text-center btn-comita text-white" >
-				<strong>Pedido de: {{ $carrito->user->fullname }}</strong>
+			<div class="card-header btn-comita text-white" >
+				<div class="user-block">
+					<label class="checkbox-btn mb-0" >
+                        <span class="btn btn-light-checkbox bg-light" style="font-size: 15px;">
+							<strong>Pedido de:{{ $carrito->user->fullname }}</strong>
+						</span>
+					</label>
+				</div>
+				<div class="card-tools" style="top: .8rem;">
+					Estado del pedido:
+					<label class="checkbox-btn mb-0" >
+                        <span class="btn btn-light-checkbox" style="font-size: 15px; background-color: cyan;">{{ $carrito->estado }}</span>
+                    </label>
+				</div>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
@@ -118,11 +130,21 @@
 					</table>
 				</div>
 			</div>
-			@if($carrito->estado === 'Pendiente')
+			@if($carrito->estado === 'Procesando')
 			<div class="card-footer row justify-content-center">
 				<button type="button" class="btn text-white btn-comita" data-carritoid="{{ $carrito->id }}" data-toggle="modal" data-target="#crearFecha">
 	                <i class="fas fa-hand-holding-usd"></i> ENVIAR A VENTA
 	            </button>
+			</div>
+			@else
+			<div class="card-footer row justify-content-center">
+				<a href="{{ route('admin.aprobados.carriapro', [$carrito->id]) }}" class="btn btn-outline-success"  >
+                    APROBAR
+                </a>
+                <span class="p-3"></span>
+                <a href="{{ route('admin.aprobados.carrirepro', [$carrito->id]) }}" class="btn   btn-outline-danger"  >
+                    RECHAZAR
+                </a>
 			</div>
 			@endif
 		</div>

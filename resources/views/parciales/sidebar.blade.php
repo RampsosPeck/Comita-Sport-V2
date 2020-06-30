@@ -119,6 +119,34 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ route('admin.aprobados') }}" class="nav-link {{ request()->is('admin/aprobados*') ? 'active' : '' }}">
+              <img src="{{ asset('img/sidebar/pedidosapro.svg') }}" alt="categorias" class="nav-icon">
+              <p>
+                  @if($nummsj = Carrito::where('estado','Procesando')->count())
+                      <span class="right badge bg-info mr-4" >{{ $nummsj }}</span>
+                  @endif
+                  Pedidos Aprobados
+                  @if($numco = Cotizacion::where('estado','Procesando')->count())
+                      <span class="right badge bg-primary">{{ $numco }}</span>
+                  @endif
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.rechazados') }}" class="nav-link {{ request()->is('admin/rechazados*') ? 'active' : '' }}">
+              <img src="{{ asset('img/sidebar/marketnot.svg') }}" alt="categorias" class="nav-icon">
+              <p>
+                  @if($nummsj = Carrito::where('estado','Procesando')->count())
+                      <span class="right badge bg-info mr-4" >{{ $nummsj }}</span>
+                  @endif
+                  Pedidos rechazados
+                  @if($numco = Cotizacion::where('estado','Procesando')->count())
+                      <span class="right badge bg-primary">{{ $numco }}</span>
+                  @endif
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('admin.ventas.index') }}" class="nav-link {{ request()->is('admin/ventas*') ? 'active' : '' }}">
               <img src="{{ asset('img/sidebar/ventas.svg') }}" alt="categorias" class="nav-icon">
               <p>

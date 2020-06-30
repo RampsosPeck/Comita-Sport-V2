@@ -119,7 +119,7 @@ class PedidoController extends Controller
             'anticipo'=>$request->anticipo
         ]);
 
-        return redirect('/admin/ventas')->with('success','Excelente! El carrito de compras paso a ventas.');
+        return redirect('/admin/aprobados')->with('success','Excelente! El pedido esta aprobado.');
     }
 
     public function pedidopago(Request $request)

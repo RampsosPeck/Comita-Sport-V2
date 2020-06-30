@@ -113,6 +113,12 @@ function(){
 	Route::post('pedido/{id}/verify','PedidoController@verify')->name('admin.pago.verify');
 	Route::post('pedido/pagos/resverify','PedidoController@resverify')->name('admin.pagos.resverify');
 
+	/*Pedidos aprobados*/
+	Route::get('aprobados','AprobadoController@index')->name('admin.aprobados');
+	Route::get('aprobados/{id}/aprobado','AprobadoController@aprobado')->name('admin.aprobados.carriapro');
+	Route::get('aprobados/{id}/rechazado','AprobadoController@rechazado')->name('admin.aprobados.carrirepro');
+
+	Route::get('rechazados','AprobadoController@indexview')->name('admin.rechazados');
 
 	}
 );
