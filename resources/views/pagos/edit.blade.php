@@ -37,9 +37,9 @@
             <div class="card-body ">
             	<div class="row justify-content-center">
             	<div class="col-md-5">
-					<div class="img-thumbnail">
-	                <img src="{{ url($pago->imagen ) }}" alt="Imagen de pago" class="d-block w-100" style="max-height: 450px !important;">
-					</div>
+
+	                <img src="{{ url($pago->imagen ) }}" alt="Imagen de pago" class="zoom-img" id="zoom_01" data-zoom-image="{{ url($pago->imagen ) }}"  style="width: 100%;">
+
 				</div>
 				<div class="col-md-7">
 					<div class="form-group row ">
@@ -132,7 +132,13 @@
 </section>
 @endsection
 
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/gh/igorlino/elevatezoom-plus@1.2.3/src/jquery.ez-plus.js"></script>
 
+<script>
+    $('#zoom_01').ezPlus();
+</script>
+@endpush
 
 
 
