@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Carrito;
+use App\Models\CarritoPago;
 use App\Models\Cotizacion;
 use App\Models\Pago;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -72,6 +73,16 @@ class User extends Authenticatable
     public function getCotizacionAttribute()
     {
         $cotizacion = $this->cotizaciones()->where('estado', 'Pendiente')->first();
+    }
+
+    public function capago()
+    {
+        return $this->hasMany(CarritoPago::class);
+    }
+
+    public function copago()
+    {
+        return $this->hasMany(CotiPago::class);
     }
 
 }

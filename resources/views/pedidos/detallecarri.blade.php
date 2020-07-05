@@ -22,7 +22,7 @@
 @endsection
 
 @section('contenido')
-@include('pedidos.fechacarri')
+@include('pagos.pagocarri')
 <section class="content">
 	<div class="container-fluid">
 		<div class="card">
@@ -132,15 +132,16 @@
 			</div>
 			@if($carrito->estado === 'Procesando')
 			<div class="card-footer row justify-content-center">
-				<button type="button" class="btn text-white btn-comita" data-carritoid="{{ $carrito->id }}" data-toggle="modal" data-target="#crearFecha">
-	                <i class="fas fa-hand-holding-usd"></i> ENVIAR A VENTA
+				<button type="button" class="btn  btn-success" data-carritoid="{{ $carrito->id }}" data-carritofecha="{{ $carrito->fecha_entrega ? $carrito->fecha_entrega->format('d M Y') : '' }}" data-toggle="modal" data-target="#pagarDeuda">
+	                <i class="far fa-money-bill-alt"> </i> ¿Pagar?
 	            </button>
-			</div>
+	        </div>
 			@else
 			<div class="card-footer row justify-content-center">
 				<a href="{{ route('admin.aprobados.carriapro', [$carrito->id]) }}" class="btn btn-outline-success"  >
                     APROBAR
                 </a>
+
                 <span class="p-3"></span>
                 <a href="{{ route('admin.aprobados.carrirepro', [$carrito->id]) }}" class="btn   btn-outline-danger"  >
                     RECHAZAR
@@ -155,12 +156,17 @@
 
 @push('scripts')
 <script>
-$('#crearFecha').on('show.bs.modal', function (event) {
-
+$('#pagarDeuda').on('show.bs.modal', function (event) {
 	  var button = $(event.relatedTarget)
 	  var ca_id = button.data('carritoid')
+	  var ca_fe = button.data('carritofecha')
 	  var modal = $(this)
 	  modal.find('.modal-body #carrito_id').val(ca_id);
+	  modal.find('.modal-body #fecha').val(ca_fe);
 })
 </script>
 @endpush
+
+
+
+

@@ -101,6 +101,24 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ route('admin.pagos.index') }}" class="nav-link {{ request()->is('admin/pagos*') ? 'active' : '' }}">
+              <img src="{{ asset('img/sidebar/imgpago.svg') }}" alt="pedidos" class="nav-icon">
+              <p>
+                @php
+                  use App\Models\CarritoPago;
+                  use App\Models\CotiPago;
+                @endphp
+                  @if($numimg = CarritoPago::where('estado','Pendiente')->where('usuario',auth()->user()->id)->count())
+                      <span class="right badge bg-success mr-4" >{{ $numimg }}</span>
+                  @endif
+                  Imagenes/pagos
+                  @if($numimage = CotiPago::where('estado','Pendiente')->where('usuario',auth()->user()->id)->count())
+                      <span class="right badge bg-warning" >{{ $numimage }}</span>
+                  @endif
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('admin.pedidos.index') }}" class="nav-link {{ request()->is('admin/pedidos*') ? 'active' : '' }}">
               <img src="{{ asset('img/sidebar/pedidos.svg') }}" alt="pedidos" class="nav-icon">
               <p>
@@ -136,11 +154,11 @@
             <a href="{{ route('admin.rechazados') }}" class="nav-link {{ request()->is('admin/rechazados*') ? 'active' : '' }}">
               <img src="{{ asset('img/sidebar/marketnot.svg') }}" alt="categorias" class="nav-icon">
               <p>
-                  @if($nummsj = Carrito::where('estado','Procesando')->count())
+                  @if($nummsj = Carrito::where('estado','Rechazado')->count())
                       <span class="right badge bg-info mr-4" >{{ $nummsj }}</span>
                   @endif
                   Pedidos rechazados
-                  @if($numco = Cotizacion::where('estado','Procesando')->count())
+                  @if($numco = Cotizacion::where('estado','Rechazado')->count())
                       <span class="right badge bg-primary">{{ $numco }}</span>
                   @endif
               </p>
@@ -150,11 +168,11 @@
             <a href="{{ route('admin.ventas.index') }}" class="nav-link {{ request()->is('admin/ventas*') ? 'active' : '' }}">
               <img src="{{ asset('img/sidebar/ventas.svg') }}" alt="categorias" class="nav-icon">
               <p>
-                  @if($nummsj = Carrito::where('estado','Procesando')->count())
+                  @if($nummsj = Carrito::where('estado','Finalizado')->count())
                       <span class="right badge bg-info mr-4" >{{ $nummsj }}</span>
                   @endif
                   Ventas
-                  @if($numco = Cotizacion::where('estado','Procesando')->count())
+                  @if($numco = Cotizacion::where('estado','Finalizado')->count())
                       <span class="right badge bg-primary">{{ $numco }}</span>
                   @endif
               </p>

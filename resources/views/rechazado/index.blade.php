@@ -27,29 +27,29 @@
 		<div class="col-12 col-sm-12 col-lg-12 mx-auto">
 			<div class="card card-widget widget-user">
               	<div class="widget-user-header text-white"
-                   	style="background: url('/img/welcome/potosi2.jpg') center center;">
+                   	style="background: url('/img/welcome/potosi4.jpg') center center;">
                 	<h3 class="widget-user-username text-right">Nombre</h3>
                 	<h5 class="widget-user-desc text-right">Administrador</h5>
               	</div>
               <div class="widget-user-image">
-                <img class="img-circle" src="{{ asset('img/sidebar/userdefault.svg') }}" alt="User Avatar">
+                <img style="border:none;" src="{{ asset('img/welcome/rechazados.svg') }}" alt="User Avatar">
               </div>
                 <div class="card-body bg-light pt-0" >
               		<div class="text-center p-2">
-              			<strong>LISTA DE PEDIDOS</strong>
+              			<strong>LISTA DE PEDIDOS RECHAZADOS</strong>
               		</div>
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
 					  <li class="nav-item col-md-6 text-center" role="presentation">
 					     <a class="nav-link active text-white" id="carritos-tab" data-toggle="tab" href="#carritos" role="tab" aria-controls="carritos" aria-selected="true">CARRITO DE COMPRAS</a>
 					  </li>
 					  <li class="nav-item col-md-6 text-center" role="presentation">
-					    <a class="nav-link text-white" id="cotizaciones-tab" data-toggle="tab" href="#cotizaciones" role="tab" aria-controls="cotizaciones" aria-selected="false">COTIZACIONES</a>
+					    <a class="nav-link text-white" id="cotizaciones-tab" data-toggle="tab" href="#cotizaciones" role="tab" aria-controls="cotizaciones" aria-selected="false">COTIZACIONES RECHAZADAS</a>
 					  </li>
 					</ul>
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade show active" id="carritos" role="tabpanel" aria-labelledby="carritos-tab">
 							<div class="p-2 text-center">
-								<strong>Lista del carrito de compras</strong>
+								<strong>Lista del carrito de compras rechazados</strong>
 							</div>
 							<div class="table-responsive bg-light" >
 								<table class="table" id="tabla-tallas">
@@ -110,24 +110,25 @@
 						</div>
 						<div class="tab-pane fade" id="cotizaciones" role="tabpanel" aria-labelledby="cotizaciones-tab">
 							<div class="p-2 text-center">
-								<strong>Lista de las cotizaciones</strong>
+								<strong>Lista de las cotizaciones rechazadas</strong>
 							</div>
 							<div class="table-responsive bg-light" >
 								<table class="table" id="tabla-tallas">
 									<thead style="background-color:#0a2b4e; color: cyan; ">
 										<tr class="text-center">
 											<th scope="col">#</th>
-											<th scope="col">Nombre/Código</th>
+											<th scope="col">Datos</th>
+											<th scope="col">Código</th>
+											<th scope="col">Descripción</th>
 											<th scope="col">Estado</th>
 											<th scope="col">Total</th>
-											<th scope="col">Acciones</th>
 										</tr>
 									</thead>
 									<tbody>
 										@foreach($cotizaciones as $key => $cotizacion)
 										<tr>
 											<td class="" style="text-align: center">{{ ++$key }}</td>
-											<td class="col-sm-6 col-md-6">
+											<td class="col-sm-4 col-md-4">
 												<div class="media">
 						                            <a class="thumbnail pull-left pr-2" href=" " target="_blanck">
 						                            	<img class="media-object" src="{{ asset($cotizacion->fotoimagen) }}" style="width: 70px; height: 70px; border:2px solid cyan;">
@@ -139,70 +140,35 @@
 						                                    </h1>
 						                                </div>
 						                                <div class="product-talla pt-0 mt-0">
+									                    	<strong>Cantidad:</strong>
+									                        <label class="checkbox-btn pt-0 mt-0 pb-0 mb-0">
+									                            <span class="btn btn-light-checkbox" > {{ $cotizacion->cantidad }} </span>
+									                        </label>
+									                    </div>
+									                    <div class="product-talla pt-0 mt-0">
 									                    	<strong>Entrega:</strong>
 									                        <label class="checkbox-btn pt-0 mt-0 pb-0 mb-0">
 									                            <span class="btn btn-light-checkbox" > {{ $cotizacion->fecha->format('d M') }} </span>
 									                        </label>
 									                    </div>
-														<small class="text-sm-left text-muted pb-0 mb-0 ">
-		                                                  {{ $cotizacion->codigo }}
-		                                                </small>
-														<a href="{{ route('admin.pedidos.detallecoti',[$cotizacion->slug]) }}" class="btn btn-sm   btn-outline-success " data-toggle="tooltip" data-placement="right" title="Ver cotización." target="__blanck"  >
-															<i class="far fa-eye"></i>
-								                        </a>
 						                            </div>
 						                        </div>
 											</td>
+											<td class="col-sm-2 col-md-2 text-center">
+												<label class="checkbox-btn pt-0 mt-0 pb-0 mb-0">
+						                            <span class="btn btn-light-checkbox" > {{ $cotizacion->codigo }} </span>
+						                        </label>
+											</td>
+											<td class="col-sm-3 col-md-3 text-justify">
+												{{ $cotizacion->descripcion }}
+											</td>
 											<td class="col-sm-1 col-md-1 text-center">
 												<label class="checkbox-btn" >
-                                                    <span class="btn btn-light-checkbox" style="background-color: cyan; font-size: 15px;"> {{ $cotizacion->estado }} </span>
+                                                    <span class="btn btn-light-checkbox bg-danger" style="font-size: 15px;"> {{ $cotizacion->estado }} </span>
                                                 </label>
 											</td>
-											<td class="col-sm-2 col-md-2 text-center">
+											<td class="col-sm-1 col-md-1 text-center">
 												<strong>Bs. {{ $cotizacion->precio }}</strong>
-												<a href="{{ route('admin.pedidos.detallecoti',[$cotizacion->slug]) }}" class="btn btn-sm btn-outline-secondary" target="__blanck">
-		                                            ¿ANTICIPO?
-		                                        </a>
-											</td>
-											<td class="col-sm-1 col-md-1 text-white " >
-											  	<a href="{{ route('admin.pedidos.detallecoti',[$cotizacion->slug]) }}" class="btn btn-sm btn-block btn-comita" target="_blanck">
-				                                    <span class="text-white">Ver Cotización</span>
-				                                </a>
-				                                @if($cotizacion->pagoimgcoti)
-													@if(auth()->user()->tipo === 'Administrador')
-														@if($cotizacion->pagoimgcoti->estado === 'Esperando')
-															<form action="{{ route('admin.pago.verify', $cotizacion->id) }}" method="POST">
-																@csrf
-																<input type="hidden" name="pedido" value="cotizacion">
-																<button type="submit" class="btn btn-sm btn-block btn-outline-success" target="_blanck">
-							                                     Validar Pago
-							                                	</button>
-															</form>
-														@else
-															<span  class="btn btn-sm btn-block btn-primary" data-respu="{{ $cotizacion->pagoimgcoti->respuesta }}" data-toggle="modal" data-target="#resPago" >
-																<strong>Pago {{ $cotizacion->pagoimgcoti->estado }}</strong>
-															</span>
-														@endif
-													@else
-														@if($cotizacion->pagoimgcoti->estado === 'Esperando')
-															<span  class="btn btn-sm btn-block btn-warning" >
-																<strong>Validando Pago</strong>
-															</span>
-														@elseif($cotizacion->pagoimgcoti->estado === 'Aceptado')
-															<span class="btn btn-sm btn-block btn-success" data-respu="{{ $cotizacion->pagoimgcoti->respuesta }}" data-toggle="modal" data-target="#resPago">
-																<strong >Pago Aceptado</strong>
-															</span>
-														@else
-															<span class="btn btn-sm btn-block btn-danger" data-respu="{{ $cotizacion->pagoimgcoti->respuesta }}" data-toggle="modal" data-target="#resPago">
-																<strong >Pago Rechazado</strong>
-															</span>
-				                                		@endif
-				                                	@endif
-				                                @else
-				                                <button type="button" class="btn btn-sm btn-block  btn-outline-success" data-pedidoid="{{ $cotizacion->id }}" data-tipo="cotizacion" data-codigo="{{ $cotizacion->codigo }}" data-toggle="modal" data-target="#pedidoPago">
-									                <i class="far fa-images"></i> PAGAR
-									            </button>
-									            @endif
 											</td>
 										</tr>
 										@endforeach

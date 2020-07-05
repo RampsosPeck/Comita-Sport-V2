@@ -22,26 +22,27 @@
 @endsection
 
 @section('contenido')
-@include('pedidos.fechacarri')
-@include('pedidos.pagopedi')
-@include('pagos.respuesta')
+
+@include('pagos.pagocarri')
+@include('pagos.pagocoti')
+
 <section class="content">
 	<div class="container-fluid">
 		<div class="col-12 col-sm-12 col-lg-12 mx-auto">
 			<div class="card card-widget widget-user">
               	<div class="widget-user-header text-white"
-                   	style="background: url('/img/welcome/potosi2.jpg') center center;">
+                   	style="background: url('/img/welcome/potosi4.jpg') center center;">
                 	<h3 class="widget-user-username text-right">Nombre</h3>
                 	<h5 class="widget-user-desc text-right">Administrador</h5>
               	</div>
               <div class="widget-user-image">
-                <img class="img-circle" src="{{ asset('img/sidebar/userdefault.svg') }}" alt="User Avatar">
+                <img style="border:none;" src="{{ asset('img/welcome/aceptados.svg') }}" alt="User Avatar">
               </div>
-                <div class="card-body bg-light pt-0" >
+                <div class="card-body   pt-0" >
               		<div class="text-center p-2">
-              			<strong>LISTA DE PEDIDOS</strong>
+              			<strong>LISTA DE PEDIDOS APROBADOS</strong>
               		</div>
-					<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<ul class="nav nav-tabs bg-light" id="myTab" role="tablist">
 					  <li class="nav-item col-md-6 text-center" role="presentation">
 					     <a class="nav-link active text-white" id="carritos-tab" data-toggle="tab" href="#carritos" role="tab" aria-controls="carritos" aria-selected="true">CARRITO DE COMPRAS</a>
 					  </li>
@@ -54,14 +55,14 @@
 							<div class="p-2 text-center">
 								<strong>Lista del carrito de compras</strong>
 							</div>
-							<div class="table-responsive bg-light" >
-								<table class="table" id="tabla-tallas">
+							<div class="table-responsive" >
+								<table class="table table-striped" id="tabla-tallas">
 									<thead style="background-color:#0a2b4e; color: cyan; ">
 										<tr class="text-center">
 											<th scope="col">#</th>
 											<th scope="col">Nombre/Código</th>
-											<th scope="col">Cantidad</th>
 											<th scope="col">Estado</th>
+											<th scope="col">Pago</th>
 											<th scope="col">Total</th>
 											<th scope="col">Acciones</th>
 										</tr>
@@ -69,7 +70,7 @@
 									<tbody>
 										@foreach($carritos as $key => $carrito)
 										<tr>
-											<td class="" style="text-align: center">{{ $carrito->id }}</td>
+											<td class="" style="text-align: center">{{ ++$key }}</td>
 											<td class="col-sm-5 col-md-5">
 												<div class="media">
 						                            <a class="thumbnail pull-left pr-2" href="{{ route('admin.pedidos.show', [$carrito->id]) }}" target="_blanck">
@@ -82,75 +83,74 @@
 						                                	</h1>
 						                                </div>
 						                                <div class="product-talla">
-									                    <strong>Fecha:</strong>
-									                        <label class="checkbox-btn mb-0">
-									                            <span class="btn btn-light-checkbox" > {{ $carrito->fecha_orden->format('M d') }} </span>
+									                        @if($carrito->fecha_entrega)
+									                        	<strong>Entrega:</strong>
+									                        	<label class="checkbox-btn mb-0">
+																	<span class="btn btn-light-checkbox" > {{ $carrito->fecha_entrega->format('M d') }} </span>
+																</label>
+									                            @else
+									                            <strong>Orden:</strong>
+									                        	<label class="checkbox-btn mb-0">
+									                            	<span class="btn btn-light-checkbox" > {{ $carrito->fecha_orden->format('M d') }} </span>
+									                            </label>
+									                            @endif
 									                        </label>
 									                    </div>
 														<small class="text-justify text-sm-left text-muted">
 		                                                  {{ $carrito->codigo }}
 		                                                </small>
+		                                                <a href="{{ route('admin.pedidos.show', [$carrito->id]) }}" class="btn btn-outline-secondary btn-sm" target="_blanck">
+							                        	Cantidad: <strong>{{ $carrito->carrito_detalles->count() }}</strong>
+							                        	</a>
 						                            </div>
 						                        </div>
 											</td>
-											<!--<td class="col-sm-1 col-md-1">
-					                        	<strong>{{ $carrito->fecha_orden->format('M d') }} - {{ $carrito->fecha_orden->diffForHumans() }}</strong>
-					                        </td>-->
-					                        <td class="col-sm-2 col-md-2">
-					                        	<a href="{{ route('admin.pedidos.show', [$carrito->id]) }}" class="btn btn-outline-secondary btn-sm" target="_blanck">
-					                        	Productos: <strong>{{ $carrito->carrito_detalles->count() }}</strong>
-					                        	</a>
-					                        </td>
 											<td class="col-sm-1 col-md-1 text-center">
 												<label class="checkbox-btn mb-0 " >
                                                     <span class="btn btn-light-checkbox bg-success" style="font-size: 15px;"> {{ $carrito->estado }} </span>
                                                 </label>
 											</td>
 											<td class="col-sm-2 col-md-2 text-center">
-												<strong>Bs. {{ $carrito->total_bs }}</strong>
-									            <button type="button" class="btn btn-sm btn-outline-success" data-carritoid="{{ $carrito->id }}" data-toggle="modal" data-target="#crearFecha">
-									                <i class="fas fa-hand-holding-usd"></i> ENVIAR A VENTA
+												@if($carrito->anticipo)
+													<strong>Bs. {{ $carrito->anticipo }}</strong>
+												@else
+													<span style="color:red;"> <strong>Sin pago</strong> </span>
+												@endif
+												<button type="button" class="btn btn-sm btn-outline-success" data-carritoid="{{ $carrito->id }}" data-carritofecha="{{ $carrito->fecha_entrega ? $carrito->fecha_entrega->format('d M Y') : '' }}" data-toggle="modal" data-target="#pagarDeuda">
+									                <i class="far fa-money-bill-alt"> </i> ¿Pagar?
 									            </button>
+											</td>
+											<td class="col-sm-2 col-md-2 text-center">
+												<strong>Bs. {{ $carrito->total_bs }}</strong>
+												@if($carrito->anticipo < $carrito->total_bs)
+													<button type="button" class="btn btn-sm btn-outline-secondary" data-carritoid="{{ $carrito->id }}" data-carritofecha="{{ $carrito->fecha_entrega ? $carrito->fecha_entrega->format('d M Y') : '' }}" data-toggle="modal" data-target="#pagarDeuda">
+										                Deuda: {{ $carrito->total_bs - $carrito->anticipo }} Bs.
+										            </button>
+									            @endif
 											</td>
 											<td class="col-sm-1 col-md-1 text-center  " >
 											  	<a href="{{ route('admin.pedidos.show', [$carrito->id]) }}" class="btn btn-sm btn-block btn-comita" target="_blanck">
 				                                    <span class="text-white">Ver Pedido</span>
 				                                </a>
-				                                @if($carrito->pagoimgcarri)
-													@if(auth()->user()->tipo === 'Administrador')
-														@if($carrito->pagoimgcarri->estado === 'Esperando')
-															<form action="{{ route('admin.pago.verify', $carrito->id) }}" method="POST">
-																@csrf
-																<input type="hidden" name="pedido" value="carrito">
-																<button type="submit" class="btn btn-sm btn-block btn-outline-success" target="_blanck">
-							                                     Validar Pago
-							                                	</button>
-															</form>
-														@else
-															<span  class="btn btn-sm btn-block btn-info" data-respu="{{ $carrito->pagoimgcarri->respuesta }}" data-toggle="modal" data-target="#resPago" >
-																<strong>Pago {{ $carrito->pagoimgcarri->estado }}</strong>
-															</span>
-														@endif
+				                                 @if($carrito->pagoimgcarri)
+													@if($carrito->pagoimgcarri->estado === 'Pendiente')
+														<span  class="btn btn-sm btn-block btn-warning" >
+															<strong>Validando Pago</strong>
+														</span>
+													@elseif($carrito->pagoimgcarri->estado === 'Aceptado')
+														<span class="btn btn-sm btn-block btn-success" data-respu="{{ $carrito->pagoimgcarri->respuesta }}" data-toggle="modal" data-target="#resPago">
+															<strong >Pago Aceptado</strong>
+														</span>
 													@else
-														@if($carrito->pagoimgcarri->estado === 'Esperando')
-															<span  class="btn btn-sm btn-block btn-warning" >
-																<strong>Validando Pago</strong>
-															</span>
-														@elseif($carrito->pagoimgcarri->estado === 'Aceptado')
-															<span class="btn btn-sm btn-block btn-success" data-respu="{{ $carrito->pagoimgcarri->respuesta }}" data-toggle="modal" data-target="#resPago">
-																<strong >Pago Aceptado</strong>
-															</span>
-														@else
-															<span class="btn btn-sm btn-block btn-danger" data-respu="{{ $carrito->pagoimgcarri->respuesta }}" data-toggle="modal" data-target="#resPago">
-																<strong >Pago Rechazado</strong>
-															</span>
-				                                		@endif
-				                                	@endif
-				                                @else
-				                                <button type="button" class="btn btn-sm btn-block  btn-outline-success" data-pedidoid="{{ $carrito->id }}" data-tipo="carrito" data-codigo="{{ $carrito->codigo }}" data-toggle="modal" data-target="#pedidoPago">
-									                <i class="far fa-images"></i> PAGAR
-									            </button>
-												@endif
+														<span class="btn btn-sm btn-block btn-danger" data-respu="{{ $carrito->pagoimgcarri->respuesta }}" data-toggle="modal" data-target="#resPago">
+															<strong >Pago Rechazado</strong>
+														</span>
+			                                		@endif
+			                                	@else
+			                                		<a href="{{ route('aprobados.pagar.carrito',$carrito->id) }}" class="btn btn-sm btn-block btn-outline-success">
+									            		<i class="far fa-images"></i> Enviar imagen de pago
+									            	</a>
+									            @endif
 											</td>
 										</tr>
 										@endforeach
@@ -162,14 +162,15 @@
 							<div class="p-2 text-center">
 								<strong>Lista de las cotizaciones</strong>
 							</div>
-							<div class="table-responsive bg-light" >
-								<table class="table" id="tabla-tallas">
+							<div class="table-responsive " >
+								<table class="table table-striped" id="tabla-tallas">
 									<thead style="background-color:#0a2b4e; color: cyan; ">
 										<tr class="text-center">
 											<th scope="col">#</th>
 											<th scope="col">Nombre/Código</th>
 											<th scope="col">Estado</th>
-											<th scope="col">Total</th>
+											<th scope="col">Pago</th>
+											<th scope="col">Precio</th>
 											<th scope="col">Acciones</th>
 										</tr>
 									</thead>
@@ -177,7 +178,7 @@
 										@foreach($cotizaciones as $key => $cotizacion)
 										<tr>
 											<td class="" style="text-align: center">{{ ++$key }}</td>
-											<td class="col-sm-6 col-md-6">
+											<td class="col-sm-5 col-md-5">
 												<div class="media">
 						                            <a class="thumbnail pull-left pr-2" href=" " target="_blanck">
 						                            	<img class="media-object" src="{{ asset($cotizacion->fotoimagen) }}" style="width: 70px; height: 70px; border:2px solid cyan;">
@@ -209,49 +210,45 @@
                                                 </label>
 											</td>
 											<td class="col-sm-2 col-md-2 text-center">
+												@if($cotizacion->anticipo)
+													<strong>Bs. {{ $cotizacion->anticipo }}</strong>
+												@else
+													<span style="color:red;"> <strong>Sin pago</strong> </span>
+												@endif
+		                                        <button type="button" class="btn btn-sm btn-block  btn-outline-success" data-cotizacionid="{{ $cotizacion->id }}" data-toggle="modal" data-target="#pagarDecoti">
+									                <i class="far fa-money-bill-alt"> </i> ¿PAGAR?
+									            </button>
+		                                    </td>
+											<td class="col-sm-2 col-md-2 text-center">
 												<strong>Bs. {{ $cotizacion->precio }}</strong>
-												<a href="{{ route('admin.pedidos.detallecoti',[$cotizacion->slug]) }}" class="btn btn-sm btn-outline-secondary" target="__blanck">
-		                                            ¿ANTICIPO?
-		                                        </a>
+												@if($cotizacion->anticipo < $cotizacion->precio)
+													<button type="button" class="btn btn-sm btn-outline-secondary" data-cotizacionid="{{ $cotizacion->id }}" data-toggle="modal" data-target="#pagarDecoti">
+										                Deuda: {{ $cotizacion->precio - $cotizacion->anticipo }} Bs.
+										            </button>
+									            @endif
 											</td>
 											<td class="col-sm-1 col-md-1 text-white " >
-											  	<a href="{{ route('admin.pedidos.detallecoti',[$cotizacion->slug]) }}" class="btn btn-sm btn-block btn-comita" target="_blanck">
+												<a href="{{ route('admin.pedidos.detallecoti',[$cotizacion->slug]) }}" class="btn btn-sm btn-block btn-comita" target="_blanck">
 				                                    <span class="text-white">Ver Cotización</span>
 				                                </a>
-				                                @if($cotizacion->pagoimgcoti)
-													@if(auth()->user()->tipo === 'Administrador')
-														@if($cotizacion->pagoimgcoti->estado === 'Esperando')
-															<form action="{{ route('admin.pago.verify', $cotizacion->id) }}" method="POST">
-																@csrf
-																<input type="hidden" name="pedido" value="cotizacion">
-																<button type="submit" class="btn btn-sm btn-block btn-outline-success" target="_blanck">
-							                                     Validar Pago
-							                                	</button>
-															</form>
-														@else
-															<span  class="btn btn-sm btn-block btn-primary" data-respu="{{ $cotizacion->pagoimgcoti->respuesta }}" data-toggle="modal" data-target="#resPago" >
-																<strong>Pago {{ $cotizacion->pagoimgcoti->estado }}</strong>
-															</span>
-														@endif
+									            @if($cotizacion->pagoimgcoti)
+													@if($cotizacion->pagoimgcoti->estado === 'Pendiente')
+														<span  class="btn btn-sm btn-block btn-warning" >
+															<strong>Validando Pago</strong>
+														</span>
+													@elseif($cotizacion->pagoimgcoti->estado === 'Aceptado')
+														<span class="btn btn-sm btn-block btn-success" data-respu="{{ $cotizacion->pagoimgcoti->respuesta }}" data-toggle="modal" data-target="#resPago">
+															<strong >Pago Aceptado</strong>
+														</span>
 													@else
-														@if($cotizacion->pagoimgcoti->estado === 'Esperando')
-															<span  class="btn btn-sm btn-block btn-warning" >
-																<strong>Validando Pago</strong>
-															</span>
-														@elseif($cotizacion->pagoimgcoti->estado === 'Aceptado')
-															<span class="btn btn-sm btn-block btn-success" data-respu="{{ $cotizacion->pagoimgcoti->respuesta }}" data-toggle="modal" data-target="#resPago">
-																<strong >Pago Aceptado</strong>
-															</span>
-														@else
-															<span class="btn btn-sm btn-block btn-danger" data-respu="{{ $cotizacion->pagoimgcoti->respuesta }}" data-toggle="modal" data-target="#resPago">
-																<strong >Pago Rechazado</strong>
-															</span>
-				                                		@endif
-				                                	@endif
-				                                @else
-				                                <button type="button" class="btn btn-sm btn-block  btn-outline-success" data-pedidoid="{{ $cotizacion->id }}" data-tipo="cotizacion" data-codigo="{{ $cotizacion->codigo }}" data-toggle="modal" data-target="#pedidoPago">
-									                <i class="far fa-images"></i> PAGAR
-									            </button>
+														<span class="btn btn-sm btn-block btn-danger" data-respu="{{ $cotizacion->pagoimgcoti->respuesta }}" data-toggle="modal" data-target="#resPago">
+															<strong >Pago Rechazado</strong>
+														</span>
+			                                		@endif
+			                                	@else
+			                                		 <a href="{{ route('aprobados.pagar.cotizacion',$cotizacion->slug) }}" class="btn btn-sm btn-block  btn-outline-success">
+										            	<i class="far fa-images"></i> Enviar imagen de pago
+										            </a>
 									            @endif
 											</td>
 										</tr>
@@ -296,34 +293,13 @@
 	padding: 0.0rem 0.3rem;
 }
 
+
 </style>
 @endpush
 
 
 @push('scripts')
-<script>
-$('#crearFecha').on('show.bs.modal', function (event) {
 
-	  var button = $(event.relatedTarget)
-	  var ca_id = button.data('carritoid')
-	  var modal = $(this)
-	  modal.find('.modal-body #carrito_id').val(ca_id);
-})
-</script>
-
-<script>
-$('#pedidoPago').on('show.bs.modal', function (event) {
-
-	  var button = $(event.relatedTarget)
-	  var pe_id = button.data('pedidoid')
-	  var pe_tipo = button.data('tipo')
-	  var pe_codigo = button.data('codigo')
-	  var modal = $(this)
-	  modal.find('.modal-body #pedido_id').val(pe_id);
-	  modal.find('.modal-body #pedido_tipo').val(pe_tipo);
-	  modal.find('.modal-body #pedido_codigo').val(pe_codigo);
-})
-</script>
 <script>
 $custom-file-text: (
   es: "Elegir"
@@ -331,13 +307,21 @@ $custom-file-text: (
 </script>
 
 <script>
-$('#resPago').on('show.bs.modal', function (event) {
+$('#pagarDeuda').on('show.bs.modal', function (event) {
 
 	  var button = $(event.relatedTarget)
-	  var respuesta = button.data('respu')
+	  var ca_id = button.data('carritoid')
+	  var ca_fe = button.data('carritofecha')
 	  var modal = $(this)
-	  modal.find('.modal-body #respuesta_id').val(respuesta);
+	  modal.find('.modal-body #carrito_id').val(ca_id);
+	  modal.find('.modal-body #fecha').val(ca_fe);
+})
+$('#pagarDecoti').on('show.bs.modal', function (event) {
+
+	  var button = $(event.relatedTarget)
+	  var co_id = button.data('cotizacionid')
+	  var modal = $(this)
+	  modal.find('.modal-body #cotizacion_id').val(co_id);
 })
 </script>
 @endpush
-

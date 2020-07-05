@@ -17,9 +17,9 @@ class AprobadoController extends Controller
     {
         $carritos = Carrito::where('estado','Procesando')->orderBy('id','DESC')->paginate();
         $cotizaciones = Cotizacion::where('estado','Procesando')->orderBy('id','DESC')->paginate();
+        //dd($cotizaciones);
 
-
-        return view('aprobado.index', compact('carritos','cotizaciones' ));
+        return view('aprobado.index', compact('carritos','cotizaciones'));
     }
 
     public function indexview()
@@ -40,62 +40,21 @@ class AprobadoController extends Controller
     public function rechazado($id)
     {
         Carrito::where('id',$id)->update(['estado'=>'Rechazado']);
-        return redirect('/admin/rechazados')->with('info','El pedido fue rechazado.');
+        return response()->json(['success'=>'El pedido fue rechazado.']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function cotiaprobado($id)
     {
-        //
+        //dd($id);
+        Cotizacion::where('id',$id)->update(['estado'=>'Procesando']);
+        return redirect('/admin/aprobados')->with('success','El pedido fue aprobado.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function cotirechazado($id)
     {
-        //
+        Cotizacion::where('id',$id)->update(['estado'=>'Rechazado']);
+        return response()->json(['success'=>'La cotización fue rechazada.']);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
