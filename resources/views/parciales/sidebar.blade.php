@@ -169,12 +169,25 @@
               <img src="{{ asset('img/sidebar/ventas.svg') }}" alt="categorias" class="nav-icon">
               <p>
                   @if($nummsj = Carrito::where('estado','Finalizado')->count())
-                      <span class="right badge bg-info mr-4" >{{ $nummsj }}</span>
+                      <span class="right badge bg-success mr-4" >{{ $nummsj }}</span>
                   @endif
                   Ventas
                   @if($numco = Cotizacion::where('estado','Finalizado')->count())
-                      <span class="right badge bg-primary">{{ $numco }}</span>
+                      <span class="right badge bg-warning">{{ $numco }}</span>
                   @endif
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.calendario.index') }}" class="nav-link {{ request()->is('admin/calendario/view') ? 'active' : '' }}">
+              <img src="{{ asset('img/sidebar/calendario.svg') }}" alt="categorias" class="nav-icon">
+              <p>
+                  Calendario
+                  @php
+                    $numca = Carrito::where('estado','Procesando')->count();
+                    $numco = Cotizacion::where('estado','Procesando')->count();
+                  @endphp
+                  <span class="right badge bg-danger">{{ $numca+$numco }}</span>
               </p>
             </a>
           </li>
