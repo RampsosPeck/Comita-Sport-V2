@@ -21,7 +21,7 @@
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link"  href="{{ route('carrito.detalle') }}" data-toggle="tooltip" data-placement="bottom" title="Compras">
+                <a class="nav-link"  href="{{ route('carrito.detalle') }}" data-toggle="tooltip" data-placement="bottom" title="Carrito/Compras">
                   @if($nummsj = auth()->user()->carrito->carrito_detalles->count() )
                     <span class="badge btn-comita text-white navbar-badge" style="margin-top: -4px;" >
                     {{ $nummsj }}</span>
@@ -30,13 +30,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="tooltip" data-placement="bottom" title="Mensajes">
-
+                <a class="nav-link" href="{{ route('admin.aprobados') }}" data-toggle="tooltip" data-placement="bottom" title="Cotizaciones">
+                    @if($numco = auth()->user()->cotizaciones->where('estado','Procesando')->count() )
                         <span class="badge btn-comita text-white navbar-badge" style="margin-top: -4px;" >
-
+                        {{ $numco }}
                         </span>
-
-                    <img src="{{ asset('img/message.svg') }}" alt="pedidos" width="35" class="nav-icon" style="margin-top: -5px;">
+                    @endif
+                    <img src="{{ asset('img/cotizacion.svg') }}" alt="pedidos" width="35" class="nav-icon" style="margin-top: -5px;">
 
                 </a>
             </li>

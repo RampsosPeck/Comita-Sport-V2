@@ -21,7 +21,6 @@
 @endsection
 
 @section('contenido')
-
 <section class="content">
 	<div class="container-fluid">
 		<div class="col-12 col-sm-12 col-lg-12 mx-auto">
