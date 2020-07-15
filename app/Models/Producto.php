@@ -31,7 +31,7 @@ class Producto extends Model
     }
 
 
-    //Accesor para imagen por defecto
+    //Accesor para imagen favorito
     public function getFavoritoImagenUrlAttribute()
     {
         $imgFavorito = $this->fotos()->where('favorito',true)->first();
