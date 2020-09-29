@@ -150,6 +150,8 @@ function(){
 	Route::post('/reportes/prenda/view','ReporteController@verprenda')->name('reporte.prenda.view');
 
 
+	Route::get('/estadisticas/view','ReporteController@estadisticas')->name('admin.estadisticas.index');
+
 	}
 );
 

@@ -199,6 +199,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.estadisticas.index') }}" class="nav-link {{ request()->is('admin/estadisticas*') ? 'active' : '' }}">
+              <img src="{{ asset('img/sidebar/resultados.svg') }}" alt="reportes" class="nav-icon">
+              <p>
+                  Estadísticas
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

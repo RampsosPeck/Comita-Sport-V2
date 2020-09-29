@@ -25,22 +25,7 @@ class ReporteController extends Controller
         return view('reportes.index',compact('categorias','productos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function vertipo(Request $request)
     {
         Reportetipo::where('nombre','!=',$request['categoria'])->delete();
@@ -147,8 +132,14 @@ class ReporteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function estadisticas()
     {
-        //
+        //$gvca1 =  Carrito::where('estado','Finalizado')->whereBetween('fecha_entrega', ['2020-07-01', '2020-07-14'])->sum('total_bs');
+        //$gvco1 =  Cotizacion::where('estado','Finalizado')->whereBetween('fecha', ['2020-07-15', '2020-07-22'])->sum('precio');
+
+       // $gv1 = $gvca1+$gvco1;
+
+        //return view('estadistica.index', compact('gv1'));
+        return view('estadistica.index');
     }
 }
