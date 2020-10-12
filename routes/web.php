@@ -152,6 +152,8 @@ function(){
 
 	Route::get('/estadisticas/view','ReporteController@estadisticas')->name('admin.estadisticas.index');
 
+	Route::get('/recibo/{id}/aprobado','ReporteController@aproreciboca')->name('aprobados.recibo');
+
 	}
 );
 

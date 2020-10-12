@@ -114,7 +114,7 @@
         day  : 'DÍA',
         list : 'LISTA'
       },
-      initialDate: '2020-06-12',
+      //initialDate: '2020-06-12', Esto es para mostrar el calendario en tal fecha
       navLinks: true, // can click day/week names to navigate views
       businessHours: true, // display business hours
       editable: false,

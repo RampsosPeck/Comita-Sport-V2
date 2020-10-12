@@ -142,4 +142,18 @@ class ReporteController extends Controller
         //return view('estadistica.index', compact('gv1'));
         return view('estadistica.index');
     }
+
+    public function aproreciboca($id)
+    {
+        $carrito = Carrito::find($id);
+        $cade = CarritoDetalle::where('carrito_id',$carrito->id)->get();
+        $fecha = Carbon::now();
+
+        $view =  \View::make('recibos.aprobadoca', compact('carrito','cade','fecha'))->render();
+        $pdf  = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view)->setPaper('carta', 'portrait');
+        return $pdf->stream('Recibo/'.$fecha->format('d/m/Y').'.pdf');
+
+    }
+
 }
