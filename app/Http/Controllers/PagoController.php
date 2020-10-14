@@ -6,6 +6,7 @@ use App\Models\Carrito;
 use App\Models\CarritoPago;
 use App\Models\CotiPago;
 use App\Models\Cotizacion;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -19,6 +20,8 @@ class PagoController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', User::class);
+
         if(auth()->user()->tipo === 'Administrador'){
             $carripagos = CarritoPago::where('estado','Pendiente')->orderBy('id','DESC')->get();
             $cotipagos = CotiPago::where('estado','Pendiente')->orderBy('id','DESC')->get();

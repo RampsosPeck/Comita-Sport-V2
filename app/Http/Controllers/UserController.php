@@ -18,6 +18,8 @@ class UserController extends Controller
     public function index()
     {
 
+        $this->authorize('viewAny', User::class);
+
         if( auth()->user()->tipo === 'Super-Admin' ){
             $users = User::where('id','!=',auth()->user()->id)->where('activo',true)->orderBy('id', 'DESC')->paginate();
         }
@@ -113,6 +115,8 @@ class UserController extends Controller
      */
     public function edit($slug)
     {
+        $this->authorize('update', \Auth::user());
+
         $user = User::where('slug',$slug)->first();
         return view('admin.users.edit', compact('user'));
     }

@@ -95,6 +95,8 @@ class ProductoController extends Controller
      */
     public function edit($slug)
     {
+        $this->authorize('update', \Auth::user());
+
         //dd($slug);
         $producto = Producto::where('slug',$slug)->first();
         //Aqui devuelves a la vista donde esta el formulario de registro de productos

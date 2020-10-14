@@ -87,7 +87,7 @@
     <h3>Invoice specification #123</h3>
     RECIBO CARRITO
     Codisgo: {{ $carrito->codigo }}
-    Fecha Entrega: {{ $carrito->fecha_entrega->format('M d') }}
+    Fecha Entrega: {{ $carrito->fecha_entrega}}
     Antiscipo: {{ $carrito->anticipo }}
     Deutsa: {{ $carrito->total_bs - $carrito->anticipo  }}
     Prescio total: {{ $carrito->total_bs }}

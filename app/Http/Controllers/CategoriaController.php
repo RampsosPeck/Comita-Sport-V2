@@ -16,6 +16,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Categoria::class);
 
         $categorias = Categoria::orderBy('id','DESC')->paginate();
         return view('admin.categorias.index', compact('categorias'));
@@ -80,6 +81,7 @@ class CategoriaController extends Controller
      */
     public function edit($slug)
     {
+        $this->authorize('viewAny', Categoria::class);
         $categoria = Categoria::where('slug',$slug)->first();
         return view('admin.categorias.edit', compact('categoria'));
     }

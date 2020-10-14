@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Material;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -15,6 +16,8 @@ class MaterialController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Categoria::class);
+
         $materiales = Material::orderBy('id', 'DESC')->paginate();
         return view('admin.materiales.index', compact('materiales'));
     }

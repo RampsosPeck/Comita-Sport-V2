@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Talla;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -10,6 +11,8 @@ class TallaController extends Controller
 {
 	public function index()
     {
+        $this->authorize('viewAny', Categoria::class);
+
         $tallas = Talla::orderBy('id', 'DESC')->paginate();
         return view('admin.tallas.index', compact('tallas'));
     }
