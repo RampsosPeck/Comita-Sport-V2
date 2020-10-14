@@ -43,11 +43,7 @@
                       </div>
                   </div>
                   <hr>
-        					<div class="row justify-content-center">
-                      <div class="col-md-10 shadow">
-                          <canvas id="graficaVentaItem" width="400" height="400"></canvas>
-                      </div>
-                  </div>
+
                   <hr>
                   <div class="row justify-content-center">
                       <div class="col-md-10 shadow">
@@ -267,80 +263,6 @@ var myChart = new Chart(ctx, {
 });
 </script>
 
-<script>
-    var configu = {
-        type: 'line',
-        data: {
-            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-            datasets: [{
-                label: 'Deportivos',
-                data: [15,25,42,35,44,51,25,48,32,61,24,25],
-                backgroundColor: window.chartColors.red,
-                borderColor: window.chartColors.red,
-                fill: false,
-                borderDash: [5, 5],
-                pointRadius: 15,
-                pointHoverRadius: 10,
-            }, {
-                label: 'Sublimados',
-                data: [26,51,33,44,51,24,63,21,45,32,15,24],
-                backgroundColor: window.chartColors.blue,
-                borderColor: window.chartColors.blue,
-                fill: false,
-                borderDash: [5, 5],
-                pointRadius: [2, 4, 6, 18, 0, 12, 20],
-            }, {
-                label: 'Polerones(Chutillos)',
-                data: [ 24,51,34,56,28,41,31,61,25,51,21,53 ],
-                backgroundColor: window.chartColors.green,
-                borderColor: window.chartColors.green,
-                fill: false,
-                pointHoverRadius: 30,
-            }, {
-                label: 'Banderas',
-                data: [25,14,36,42,15,16,34,25,18,29,37,26],
-                backgroundColor: window.chartColors.yellow,
-                borderColor: window.chartColors.yellow,
-                fill: false,
-                pointHitRadius: 20,
-            }]
-        },
-        options: {
-            responsive: true,
-            legend: {
-                position: 'bottom',
-            },
-            hover: {
-                mode: 'index'
-            },
-            scales: {
-                xAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'MESES'
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'VALORES POR UNIDAD'
-                    }
-                }]
-            },
-            title: {
-                display: true,
-                text: 'REPORTE DE VENTAS POR - CATEGORIA DE PRODUCTO'
-            }
-        }
-    };
-
-   // window.onload = function() {
-        var ctxa = document.getElementById('graficaVentaItem').getContext('2d');
-        window.myLine = new Chart(ctxa, configu);
-    //};
-</script>
 
 <script>
     var MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];

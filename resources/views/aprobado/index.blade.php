@@ -109,9 +109,7 @@
 												<label class="checkbox-btn mb-0 " >
                                                     <span class="btn btn-light-checkbox bg-success" style="font-size: 15px;"> {{ $carrito->estado }} </span>
                                                 </label>
-                                                <a href="{{ route('aprobados.recibo',$carrito->id) }}" class="btn btn-sm btn-block btn-outline-success mt-1">
-								            		<i class="far fa-file-pdf"></i> Recibo
-								            	</a>
+
 											</td>
 											<td class="col-sm-2 col-md-2 text-center">
 												@if($carrito->anticipo)

@@ -8,6 +8,7 @@ use App\Models\Categoria;
 use App\Models\Cotizacion;
 use App\Models\Producto;
 use App\Models\Reportetipo;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,8 @@ class ReporteController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', User::class);
+
         $categorias = Categoria::get();
         $productos = Producto::get();
         return view('reportes.index',compact('categorias','productos'));
@@ -140,6 +143,7 @@ class ReporteController extends Controller
        // $gv1 = $gvca1+$gvco1;
 
         //return view('estadistica.index', compact('gv1'));
+        $this->authorize('viewAny', User::class);
         return view('estadistica.index');
     }
 

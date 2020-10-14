@@ -1,117 +1,91 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Invoice - #123</title>
+  <head>
+    <meta charset="utf-8">
+    <title>Recibo de compra</title>
+    <link href="{{ asset('pdf/style.css') }}" rel="stylesheet">
+  </head>
+  <body>
+    <header class="clearfix">
+      <div id="logo">
+        <img src="pdf/logo1.png">
+      </div>
+      <div id="company">
+        <h2 class="name">Company Name</h2>
+        <div>455 Foggy Heights, AZ 85004, US</div>
+        <div>(602) 519-0450</div>
+        <div><a href="mailto:company@example.com">company@example.com</a></div>
+      </div>
+      </div>
+    </header>
+    <main>
+      <div id="details" class="clearfix">
+        <div id="client">
+          <div class="to">RECIBO DE COMPRA</div>
+          <h2 class="name">Fabrica de ropa "Sport La Comita"</h2>
+          <h3 class="name">Cliente: {{ $carrito->user->fullname }} </h3>
+          <div class="address">Calle Oruro Nro. 184 - Calle América esq. San Alberto </div>
+          <div class="email"><a href="mailto:john@example.com">sport.lacomita19@gmail.com</a></div>
+          Código: {{ $carrito->codigo }} <br />
+          Fecha: {{ $carrito->fecha_entrega}} <br />
+          Anticipo: {{ $carrito->anticipo }} <br />
+          Precio total: {{ $carrito->total_bs }} <br />
+          Estado: {{ $carrito->estado }} <br />
+        </div>
+      </div>
+      <table border="0" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th class="no">#</th>
+            <th class="desc">DESCRIPCIÓN</th>
+            <th class="unit">PRECIO </th>
+            <th class="qty">CANTIDAD</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($cade as $key => $repro)
+          <tr>
+            <td class="no">01</td>
+            <td class="desc"><h3>Nombre</h3>{{ $repro->producto->nombre }}</td>
+            <td class="unit">{{ $repro->producto->precio }}</td>
+            <td class="qty">{{ $repro->cantidad }}</td>
+          </tr>
+          @endforeach
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="2"> </td>
+            <td> </td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="2"></td>
+            <td> </td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="2"> </td>
+            <td> </td>
+          </tr>
+        </tfoot>
+      </table>
+      <div id="thanks">¡Gracias por su preferencia!</div>
 
-    <style type="text/css">
-        @page {
-            margin: 0px;
-        }
-        body {
-            margin: 0px;
-        }
-        * {
-            font-family: Verdana, Arial, sans-serif;
-        }
-        a {
-            color: #fff;
-            text-decoration: none;
-        }
-        table {
-            font-size: x-small;
-        }
-        tfoot tr td {
-            font-weight: bold;
-            font-size: x-small;
-        }
-        .invoice table {
-            margin: 15px;
-        }
-        .invoice h3 {
-            margin-left: 15px;
-        }
-        .information {
-            background-color: #60A7A6;
-            color: #FFF;
-        }
-        .information .logo {
-            margin: 5px;
-        }
-        .information table {
-            padding: 10px;
-        }
-    </style>
-
-</head>
-<body>
-
-<div class="information">
-    <table width="100%">
-        <tr>
-            <td align="left" style="width: 40%;">
-                <h3>John Doe</h3>
-                <pre>
-                Street 15
-                123456 City
-                United Kingdom
-                <br /><br />
-                Date: 2018-01-01
-                Identifier: #uniquehash
-                Status: Paid
-                </pre>
-            </td>
-            <td align="center">
-                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.itmplatform.com%2Fes%2Fblog%2Ftodo-lo-que-debes-incluir-en-un-reporte-de-estado-de-proyecto%2F&psig=AOvVaw2ADnlvPxjDviduHRtHaNFn&ust=1594276797513000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOCe74SGveoCFQAAAAAdAAAAABAD" alt="Logo" width="64" class="logo"/>
-            </td>
-            <td align="right" style="width: 40%;">
-
-                <h3>CompanyName</h3>
-                <pre>
-                    https://company.com
-
-                    Street 26
-                    123456 City
-                    United Kingdom
-                </pre>
-            </td>
-        </tr>
-
-    </table>
-</div>
-
-
-<br/>
-
-<div class="invoice">
-    <h3>Invoice specification #123</h3>
-    RECIBO CARRITO
-    Codisgo: {{ $carrito->codigo }}
-    Fecha Entrega: {{ $carrito->fecha_entrega}}
-    Antiscipo: {{ $carrito->anticipo }}
-    Deutsa: {{ $carrito->total_bs - $carrito->anticipo  }}
-    Prescio total: {{ $carrito->total_bs }}
-    Estasdo: {{ $carrito->estado }}
-    Cliesnet: {{ $carrito->user->fullname }}
-
-    Productos;
-    @foreach($cade as $key => $repro)
-        {{ $repro->producto->nombre }}
-    @endforeach
-</div>
-
-<div class="information" style="position: absolute; bottom: 0;">
-    <table width="100%">
-        <tr>
-            <td align="left" style="width: 50%;">
-                &copy; {{ date('Y') }} {{ config('app.url') }} - All rights reserved.
-            </td>
-            <td align="right" style="width: 50%;">
-                Company Slogan
-            </td>
-        </tr>ddd
-
-    </table>
-</div>
-</body>
+    </main>
+    <footer>
+      "Sistema web Sport La Comita" {{ date('Y') }} Celular 70462939
+    </footer>
+  </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
