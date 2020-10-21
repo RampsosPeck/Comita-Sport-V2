@@ -72,6 +72,9 @@ class UserController extends Controller
     public function store(UserCrearRequest $request)
     {
         //Estoy validando con el archi UserGuardarRequest
+        $this->validate($request, [
+            'fullname' => 'unique:users,fullname'
+        ]);
         if(!empty($request['email'])){
             $this->validate($request, [
                 'email' => 'unique:users,email',

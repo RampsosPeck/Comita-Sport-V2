@@ -47,7 +47,7 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nombre' => 'required|min:5|max:100'
+            'nombre' => 'required|min:5|max:100|unique:productos,nombre'
         ]);
         $producto = new Producto;
         $producto->nombre = $request['nombre'];

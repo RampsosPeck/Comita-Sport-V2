@@ -61,8 +61,12 @@ class CarritoDetalleController extends Controller
             'tallas' => 'required',
             'cantidad' => 'required|min:1',
         ]);
-
         $producto = Producto::where('id',$id)->first();
+
+        if($request['cantidad'] > $producto->stock)
+        {
+            return back()->with('errors','Cantidad excedida al stock!');
+        }
 
         $proprecio = ($producto->precio * $request['cantidad']);
 

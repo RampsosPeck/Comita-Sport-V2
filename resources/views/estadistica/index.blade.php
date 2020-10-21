@@ -51,6 +51,12 @@
                       </div>
                   </div>
 
+                  <hr>
+                  <div class="row justify-content-center">
+                      <div class="col-md-10 shadow">
+                          <canvas id="itemventa" width="400" height="400"></canvas>
+                      </div>
+                  </div>
                 </div>
 	        </div>
 	    </div>
@@ -323,5 +329,83 @@ var myChart = new Chart(ctx, {
     };
 </script>
 
+
+<script>
+<?php
+    $nom1  = $nom1;
+    $canti1 = $cant1;
+    $nom2  = $nom2;
+    $canti2 = $cant2;
+    $nom3  = $nom3;
+    $canti3 = $cant3;
+    $nom4  = $nom4;
+    $canti4 = $cant4;
+    $nom5  = $nom5;
+    $canti5 = $cant5;
+
+?>
+     var primaro = parseInt('<?php echo $canti1; ?>');
+     var prinom = ('<?php echo $nom1; ?>');
+     var segundo = parseInt('<?php echo $canti2; ?>');
+     var senom = ('<?php echo $nom2; ?>');
+     var tercero = parseInt('<?php echo $canti3; ?>');
+     var ternom = ('<?php echo $nom3; ?>');
+     var cuarto = parseInt('<?php echo $canti4; ?>');
+     var cuanom = ('<?php echo $nom4; ?>');
+     var quinto = parseInt('<?php echo $canti5; ?>');
+     var quinom = ('<?php echo $nom5; ?>');
+
+
+
+var ctx = document.getElementById('itemventa');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [quinom, cuanom, ternom, senom, prinom],
+        datasets: [{
+            label: 'REPORTE DE LOS 5 ITEMS MAS VENDIDOS',
+            data: [ quinto,cuarto,tercero,segundo,primaro],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
 
 @endpush

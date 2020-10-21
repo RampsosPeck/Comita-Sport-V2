@@ -20,7 +20,7 @@ class TallaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nombre' => 'required'
+            'nombre' => 'required|unique:tallas,nombre'
         ]);
         //dd($request->all());
         $talla = new Talla();

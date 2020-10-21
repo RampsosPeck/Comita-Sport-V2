@@ -156,4 +156,23 @@
 </script>
 @endpush
 
+@push('scripts')
+@unless(request()->is('admin/productos/*'))
+<script>
+    if(window.location.hash === '#pro')
+    {
+        $('#crearPro').modal('show');
+    }
+    $('#crearPro').on('hide.bs.modal', function(){
+      //console.log('El modal se cierra');
+      window.location.hash = '#';
+    });
+    $('#crearPro').on('shown.bs.modal', function(){
+       $('#fullname').focus();
+       window.location.hash = '#pro';
+    });
 
+
+</script>
+@endunless
+@endpush

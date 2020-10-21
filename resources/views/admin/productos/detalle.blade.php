@@ -81,7 +81,7 @@
                           @csrf
                       <div class="subti_prodetalle">
                           <div class="form-group row">
-                            <div class="col-sm-6 form-control bg-light border-0  @error('tallas') is-invalid @enderror ">
+                            <div class="col-sm-6 form-control bg-light border-0">
                                 <h3>TALLAS</h3>
                                 <div class="product-talla">
                                     @foreach($producto->tallas as $talla)
@@ -113,7 +113,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <h3>¿Detallar?</h3>
-                                <textarea class="form-control {{ $errors->has('especificacion') ? ' is-invalid' : 'border-1' }}" rows="1" name="especificacion" id="especificacion"  placeholder="¿Algún detalle de su producto?" >{{ old('especificacion') }}</textarea>
+                                <textarea class="form-control" rows="1" name="especificacion" id="especificacion"  placeholder="¿Algún detalle de su producto?" >{{ old('especificacion') }}</textarea>
                             </div>
                           </div>
                       </div>

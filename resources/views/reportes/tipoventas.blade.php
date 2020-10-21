@@ -55,6 +55,11 @@
                 Celular: 70462939<br />
                 Email: <a href="">sport.lacomita19@gmail.com</a>
                 <br />
+                Rango de fechas: {{ $desde }} hasta {{ $hasta }}
+                <br />
+                Categoría: {{ $cate->nombre }}
+                <br />
+                Fecha: {{ $fecha }}
                 </pre>
             </td>
             <td align="center">
@@ -62,7 +67,7 @@
             </td>
             <td align="right" style="width: 40%;">
 
-                <h3>SPORT LA COMITA</h3>
+                <h3>REPORTE POR CATEGORIA DE PRENDA</h3>
                 <pre>
                     Tienda: Calle Oruro Nro. 184
                     Fábrica: Calle América esq. San Alberto

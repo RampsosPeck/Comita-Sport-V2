@@ -6,6 +6,7 @@ use App\Models\Carrito;
 use App\Models\CarritoPago;
 use App\Models\CotiPago;
 use App\Models\Cotizacion;
+use App\Models\Producto;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -41,6 +42,8 @@ class PagoController extends Controller
 
         $carrito = Carrito::where('id',$request->carrito_id)->first();
 
+        //dd($carrito->carrito_detalles);
+
         if($carrito->fecha_entrega){
             $this->validate($request, [
                 'pago' => 'required'
@@ -68,6 +71,15 @@ class PagoController extends Controller
                 'fecha_entrega' => $fecha,
                 'estado' => 'Finalizado'
             ]);
+
+            foreach($carrito->carrito_detalles as $cade)
+            {
+                $pro = Producto::find($cade->producto_id);
+                Producto::where('id',$cade->producto_id)->update([
+                    'stock' => $pro->stock - $cade->cantidad
+                ]);
+            }
+
             return redirect('/admin/ventas')->with('success','Excelente! El pago del pedido fue registrado y finalizado.');
         }else{
             Carrito::where('id',$request->carrito_id)->update([
