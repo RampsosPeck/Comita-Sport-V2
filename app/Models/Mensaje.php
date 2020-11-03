@@ -20,5 +20,8 @@ class Mensaje extends Model
     	return $this->belongsTo(User::class, 'envia');
     }
 
-
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'envia');
+    }
 }

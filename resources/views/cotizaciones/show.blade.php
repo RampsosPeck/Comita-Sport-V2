@@ -80,7 +80,10 @@
                           @if($cotizacion->precio)
                             <span style="color:cyan;"> <strong> Bs. {{ $cotizacion->precio }} </strong> </span>
                           @else
-                            <span style="color:red;" data-toggle="modal" data-target="#crearMe"> <strong> ¿PRECIO? </strong> </span>
+                            <span style="color:red;"> <strong> ¿PRECIO? </strong> </span>
+                            @can('viewAny', auth::user())
+                              <span style="color:red;" data-toggle="modal" data-target="#crearMe"> <strong> ¿PRECIO? </strong> </span>
+                            @endcan
                           @endif
                       </div>
                       <div class="media">
@@ -174,7 +177,7 @@
           </div>
         </div>
         <div class="col-md-6">
-            <div class="card direct-chat direct-chat-warning shadow">
+            <!--<div class="card direct-chat direct-chat-warning shadow">
                 <div class="card-header btn-comita text-white">
                     <h3 class="card-title text-center">Mensajes</h3>
                     <div class="card-tools">
@@ -227,7 +230,8 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div>-->
+            <chat-vue :title="{{ $cotizacion->id }}" :userauth="{{ auth()->user()->id}}" :cotiuser="{{ $cotizacion->user_id }}"></chat-vue>
         </div>
     </div>
   </div>

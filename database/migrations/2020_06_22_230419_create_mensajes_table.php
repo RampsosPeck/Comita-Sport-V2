@@ -18,7 +18,6 @@ class CreateMensajesTable extends Migration
             $table->unsignedInteger('envia');
             $table->unsignedInteger('recibe');
             $table->text('contenido');
-
             $table->unsignedBigInteger('cotizacion_id');
             $table->foreign('cotizacion_id')->references('id')->on('cotizaciones');
             $table->timestamps();
