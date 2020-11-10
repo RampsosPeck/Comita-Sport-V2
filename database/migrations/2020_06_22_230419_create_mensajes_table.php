@@ -15,9 +15,12 @@ class CreateMensajesTable extends Migration
     {
         Schema::create('mensajes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('envia');
-            $table->unsignedInteger('recibe');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('envia');
+            $table->string('recibe');
             $table->text('contenido');
+
             $table->unsignedBigInteger('cotizacion_id');
             $table->foreign('cotizacion_id')->references('id')->on('cotizaciones');
             $table->timestamps();

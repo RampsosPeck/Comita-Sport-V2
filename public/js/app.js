@@ -1989,7 +1989,7 @@ __webpack_require__.r(__webpack_exports__);
       newMensaje: ''
     };
   },
-  props: ['title', 'userauth', 'cotiuser'],
+  props: ['title', 'userauth', 'cotiuser', 'adminuser'],
   created: function created() {
     var _this = this;
 
@@ -2009,14 +2009,16 @@ __webpack_require__.r(__webpack_exports__);
     sendMensaje: function sendMensaje() {
       if (this.userauth == 2) {
         this.mensajes.push({
-          envia: this.userauth,
+          user_id: this.userauth,
+          envia: this.adminuser,
           recibe: this.usercoti,
           contenido: this.newMensaje
         });
       } else {
         this.mensajes.push({
+          user_id: this.userauth,
           envia: this.usercoti,
-          recibe: this.userauth,
+          recibe: this.adminuser,
           contenido: this.newMensaje
         });
       }
@@ -94085,7 +94087,7 @@ var render = function() {
           },
           _vm._l(_vm.mensajes, function(message, index) {
             return _c("div", { key: index, staticClass: "direct-chat-msg" }, [
-              message.envia == _vm.auth
+              message.user_id === _vm.auth
                 ? _c("div", { staticClass: "direct-chat-msg right bg-light" }, [
                     _c("div", { staticClass: "direct-chat-infos clearfix" }, [
                       _c(

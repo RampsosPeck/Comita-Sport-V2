@@ -11,7 +11,7 @@
             <div class="direct-chat-messages" v-chat-scroll>
                 <div class="direct-chat-msg" v-for="(message, index) in mensajes" :key="index" >
 
-                        <div class="direct-chat-msg right bg-light" v-if="message.envia==auth" >
+                        <div class="direct-chat-msg right bg-light" v-if="message.user_id===auth" >
                             <div class="direct-chat-infos clearfix">
                                 <span class="direct-chat-name float-right">{{ message.envia }}</span>
                                 <span class="direct-chat-timestamp float-left">{{ message.created_at | dateHuman }}</span>
@@ -63,7 +63,7 @@
                 newMensaje: ''
             }
         },
-        props: ['title','userauth','cotiuser'],
+        props: ['title','userauth','cotiuser','adminuser'],
         created(){
             this.fetchMessages();
 
@@ -82,14 +82,16 @@
             sendMensaje(){
                 if(this.userauth == 2){
                     this.mensajes.push({
-                        envia: this.userauth,
+                        user_id: this.userauth,
+                        envia: this.adminuser,
                         recibe: this.usercoti,
                         contenido: this.newMensaje,
                     });
                 }else{
                     this.mensajes.push({
+                        user_id: this.userauth,
                         envia: this.usercoti,
-                        recibe: this.userauth,
+                        recibe: this.adminuser,
                         contenido: this.newMensaje,
                     });
                 }
@@ -103,7 +105,6 @@
         }
     };
 </script>
-
 
 
 
