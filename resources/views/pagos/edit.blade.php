@@ -111,10 +111,7 @@
 		                      </div>
 		                </div>
 		            </div>
-		        </div>
-		    	</div>
-        	</div>
-	        <div class="modal-footer">
+
 	            <button name="btnrespuesta" value="Aceptado" type="submit" class="btn btn-outline-success "  >
 	              	<i class="far fa-thumbs-up"></i>
 	                ACEPTAR PAGO
@@ -124,11 +121,11 @@
 	              	<i class="far fa-thumbs-down"></i>
 	                RECHAZAR PAGO
 	            </button>
-	        </div>
+
 	    	</form>
         </div>
     </div>
-  </div>
+  </div></div></div>
 </section>
 @endsection
 

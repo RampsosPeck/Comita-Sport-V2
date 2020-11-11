@@ -1977,8 +1977,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -94087,7 +94085,7 @@ var render = function() {
           },
           _vm._l(_vm.mensajes, function(message, index) {
             return _c("div", { key: index, staticClass: "direct-chat-msg" }, [
-              message.user_id === _vm.auth
+              message.user_id == _vm.auth
                 ? _c("div", { staticClass: "direct-chat-msg right bg-light" }, [
                     _c("div", { staticClass: "direct-chat-infos clearfix" }, [
                       _c(
@@ -94221,16 +94219,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-header btn-comita text-white" }, [
       _c("h3", { staticClass: "card-title text-center" }, [_vm._v("Mensajes")]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-tools" }, [
-        _c(
-          "span",
-          {
-            staticClass: "badge badge-warning",
-            attrs: { "data-toggle": "tooltip", title: "3 New Messages" }
-          },
-          [_vm._v(" Cantidad de mensajes:  ")]
-        )
-      ])
+      _c("div", { staticClass: "card-tools" })
     ])
   }
 ]

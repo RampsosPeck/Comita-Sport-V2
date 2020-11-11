@@ -16,8 +16,8 @@ class CotizacionController extends Controller
 {
 
 
-	public function index()
-	{
+    public function index()
+    {
 
         Cotizacion::where('codigo',null)->delete();
         if(auth()->user()->tipo === 'Administrador'){
@@ -26,10 +26,10 @@ class CotizacionController extends Controller
             $cotizaciones = Cotizacion::where('user_id',auth()->user()->id)->where('estado','Activo')->orderBy('id','DESC')->paginate();
         }
 
-		return view('cotizaciones.index', compact('cotizaciones'));
-	}
+        return view('cotizaciones.index', compact('cotizaciones'));
+    }
 
-	public function store(Request $request)
+    public function store(Request $request)
     {
         $this->validate($request, [
             'nombre' => 'required|min:5|max:100'
@@ -37,8 +37,12 @@ class CotizacionController extends Controller
 
         $sl = Str::of($request['nombre'])->slug('-');
         $uid = Cotizacion::orderBy('id','DESC')->first();
-
-        $s=$uid->id+1;
+        if($uid){
+            $s=$uid->id+1;
+        }
+        else {
+            $s=1;
+        }
 
         $cotizacion = new Cotizacion;
         $cotizacion->nombre = $request['nombre'];
@@ -66,7 +70,7 @@ class CotizacionController extends Controller
 
     public function update(Request $request, $slug)
     {
-    	//dd($request->all());
+        //dd($request->all());
         $this->validate($request, [
             'cantidad' => 'required|min:1',
             'tallas' => 'required',

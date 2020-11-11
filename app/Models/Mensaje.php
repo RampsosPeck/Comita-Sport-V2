@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Mensaje extends Model
 {
     protected $table = 'mensajes';
-    protected $fillable = ['envia','recibe','contenido','cotizacion_id'];
+    protected $fillable = ['user_id','envia','recibe','contenido','cotizacion_id'];
 
     public function cotizacion()
     {
@@ -20,5 +20,9 @@ class Mensaje extends Model
     	return $this->belongsTo(User::class, 'envia');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

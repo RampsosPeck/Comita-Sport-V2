@@ -16,18 +16,27 @@ class AprobadoController extends Controller
      */
     public function index()
     {
-        $carritos = Carrito::where('estado','Procesando')->orderBy('id','DESC')->paginate();
-        $cotizaciones = Cotizacion::where('estado','Procesando')->orderBy('id','DESC')->paginate();
         //dd($cotizaciones);
+        if(auth()->user()->tipo === 'Administrador'){
+            $carritos = Carrito::where('estado','Procesando')->orderBy('id','DESC')->paginate();
+            $cotizaciones = Cotizacion::where('estado','Procesando')->orderBy('id','DESC')->paginate();
+        }else{
+            $carritos = Carrito::where('user_id',auth()->user()->id)->where('estado','Procesando')->orderBy('id','DESC')->paginate();
+            $cotizaciones = Cotizacion::where('user_id',auth()->user()->id)->where('estado','Procesando')->orderBy('id','DESC')->paginate();
+        }
 
         return view('aprobado.index', compact('carritos','cotizaciones'));
     }
 
     public function indexview()
     {
-        $carritos = Carrito::where('estado','Rechazado')->orderBy('id','DESC')->paginate();
-        $cotizaciones = Cotizacion::where('estado','Rechazado')->orderBy('id','DESC')->paginate();
-
+        if(auth()->user()->tipo === 'Administrador'){
+            $carritos = Carrito::where('estado','Rechazado')->orderBy('id','DESC')->paginate();
+            $cotizaciones = Cotizacion::where('estado','Rechazado')->orderBy('id','DESC')->paginate();
+        }else{
+            $carritos = Carrito::where('user_id',auth()->user()->id)->where('estado','Rechazado')->orderBy('id','DESC')->paginate();
+            $cotizaciones = Cotizacion::where('user_id',auth()->user()->id)->where('estado','Rechazado')->orderBy('id','DESC')->paginate();
+        }
 
         return view('rechazado.index', compact('carritos','cotizaciones' ));
     }
@@ -56,11 +65,9 @@ class AprobadoController extends Controller
         Cotizacion::where('id',$id)->update(['estado'=>'Rechazado']);
         return response()->json(['success'=>'La cotización fue rechazada.']);
     }
-
     public function calendario()
     {
         $this->authorize('viewAny', Categoria::class);
-
         $carritos = Carrito::where('estado','Procesando')->get();
         $cotizaciones = Cotizacion::where('estado','Procesando')->get();
 
